@@ -1,0 +1,6 @@
+framework module SNKThreadMonitor {
+  umbrella header "SNKThreadMonitor-umbrella.h"
+
+  export *
+  module * { export * }
+}

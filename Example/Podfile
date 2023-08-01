@@ -1,10 +1,10 @@
 use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'SNKThreadMonitor_Example' do
   pod 'SNKThreadMonitor', :path => '../'
-
+  pod 'SwiftyJSON'
   target 'SNKThreadMonitor_Tests' do
     inherit! :search_paths
 

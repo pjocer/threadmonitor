@@ -27,16 +27,21 @@ TODO: Add long description of the pod here.
   s.author           = { 'Jocer' => 'pjocer@outlook.com' }
   s.source           = { :git => 'https://github.com/Jocer/SNKThreadMonitor.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '10.0'
-
-  s.source_files = 'SNKThreadMonitor/Classes/**/*'
+  s.module_name = 'SNKThreadMonitor'
+  s.ios.deployment_target = '11.0'
+  
+  s.subspec 'Core' do |c|
+    c.source_files = 'SNKThreadMonitor/Classes/**/*'
+    c.public_header_files = 'Pod/Classes/export/*{.h, .swift}'
+  end
+  
+  s.default_subspecs = 'Core'
   
   # s.resource_bundles = {
   #   'SNKThreadMonitor' => ['SNKThreadMonitor/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+  
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
