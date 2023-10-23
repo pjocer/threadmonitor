@@ -105,6 +105,11 @@ public protocol ThreadMonitorInfosProviding: AnyObject {
     func threadMonitorDidReceiveInfosDeadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider: [MachInfoProvider]])
 }
 
+public extension ThreadMonitorInfosProviding {
+    func threadMonitorDidReceiveInfosUpdated(_ infos: [MachInfoProvider]) {}
+    func threadMonitorDidReceiveInfosDeadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider: [MachInfoProvider]]) {}
+}
+
 // 线程内省状态回调
 public protocol ThreadMonitorIntrospectionStateProviding: AnyObject {
     func threadMonitorDidReceiveStateChanged(_ info: POSIXInfoProvider)

@@ -50,8 +50,8 @@ class ThreadMonitorInfosDelegate: ThreadMonitorInfosProviding {
 //        }
     }
     func threadMonitorDidReceiveInfosDeadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider : [MachInfoProvider]]) {
+        print("\nthreadMonitorDidReceiveInfosDeadLockDetached:💩💩💩💩")
         deadLockInfos.forEach { holding, waitings in
-            print("\nthreadMonitorDidReceiveInfosDeadLockDetached:💩💩💩💩")
             var waitingsDesc = ""
             waitingsDesc = waitings.reduce(into: waitingsDesc) { partialResult, provider in
                 partialResult = partialResult + "\n\(provider.description)"
