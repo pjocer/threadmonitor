@@ -53,26 +53,16 @@ void checkMainEmptyCPUUsageWithWapped(thread_t thread, uint64_t thread_id, NSMut
         NSLog(@"Fail get thread: %u", thread);
         return;
     }
-    //
-    
     //通过指令指针来获取当前指令地址
     SNKBackTrace *backTrace = [SNKBackTrace backTraceWith:thread];
     NSMutableArray *symbols = backTrace.symbols;
     for (int i = 0; i < symbols.count; i++) {
         const char *cString = [symbols[i] UTF8String];
-        // 1.模拟POSIX互斥锁，拿到等待锁的函数名：__psynch_mutexwait
-        // 2.每个锁等待的方法都会定义一个参数，传入当前锁等待的信息。
-        // 3.通过查询`https://github.com/apple-oss-distributions/libpthread/blob/d8c4e3c212553d3e0f5d76bb7d45a8acd61302dc/src/imports_internal.h#L47`官方开源库得到：
-        // extern uint32_t __psynch_mutexwait(pthread_mutex_t *mutex,  uint32_t mgen, uint32_t  ugen, uint64_t tid, uint32_t flags);
-        // 4.__psynch_mutexwait: 第一个参数为锁信息
-        // 5.按照c语言函数调用约定，arm架构下，第一个参数放在x0寄存器，即:`__ss.__x[0]`
+        // https://github.com/apple-oss-distributions/libpthread/blob/d8c4e3c212553d3e0f5d76bb7d45a8acd61302dc/src/imports_internal.h#L47
         if (strcmp(cString, "__psynch_mutexwait") == 0) {
             // 认为`thread`正在等待锁
             uintptr_t firstParam = j_firstParamRegister(&machineContext);
-            // 6.types_internal.h中有定义pthread_mutex_t其实就是pthread_mutex_s。
-            // 7.把pthread_mutex_s的定义拷贝过来，强转。
             struct pthread_mutex_s *mutex = (struct pthread_mutex_s *)firstParam;
-            // 8.持有锁的线程
             uint32_t *tid = mutex->psynch.m_tid;
             uint64_t hold_lock_thread_id = *tid;
             //需要判断死锁

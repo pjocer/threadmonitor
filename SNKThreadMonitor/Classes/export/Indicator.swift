@@ -16,4 +16,3 @@ protocol IndicatorType {
 enum Indicator {
 //    case deadLoad(_ )
 }
-

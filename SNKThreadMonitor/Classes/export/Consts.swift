@@ -128,6 +128,12 @@ public protocol ThreadMonitorDelegate: AnyObject {
     var threadStateDelegate: ThreadMonitorIntrospectionStateProviding? { get }
 }
 
+public extension ThreadMonitorDelegate {
+    var threadNotifyDelegate: ThreadMonitorNotifyProviding? { nil }
+    var threadInfosDelegate: ThreadMonitorInfosProviding? { nil }
+    var threadStateDelegate: ThreadMonitorIntrospectionStateProviding? { nil }
+}
+
 // 通知
 public extension ThreadMonitor {
     // 同`ThreadMonitorInfosProviding.threadMonitorDidReceiveInfosUpdated`
