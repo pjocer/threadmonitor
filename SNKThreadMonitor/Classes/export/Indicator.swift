@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+protocol IndicatorType {
+    var name: String { get }
+    var callStacks: [String] { get }
+    var desc: String { get }
+}
+
+enum Indicator {
+//    case deadLoad(_ )
+}
+

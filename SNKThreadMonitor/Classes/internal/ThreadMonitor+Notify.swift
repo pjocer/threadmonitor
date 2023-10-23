@@ -49,6 +49,8 @@ extension ThreadMonitor {
                 switch type {
                 case .updateAll(let infos):
                     $0.threadInfosDelegate?.threadMonitorDidReceiveInfosUpdated(infos)
+                case let .deadLockDetached(infos, deadLockInfos):
+                    $0.threadInfosDelegate?.threadMonitorDidReceiveInfosDeadLockDetached(infos, deadLockInfos: deadLockInfos)
                 }
             case .notify(let type):
                 switch type {

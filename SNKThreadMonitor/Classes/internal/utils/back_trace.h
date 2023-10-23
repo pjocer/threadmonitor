@@ -13,8 +13,6 @@
 #import <mach/mach.h>
 #import <stdio.h>
 
-void getThreadStackInfo(thread_t thread, void **callStackAddresses, size_t *callStackSize);
-
 typedef struct {
     const uintptr_t *fp; //stp fp, lr, ...
     const uintptr_t lr;

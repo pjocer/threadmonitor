@@ -9,7 +9,7 @@
 #import <stdbool.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+// 线程内省状态
 typedef NS_CLOSED_ENUM(int, SNKPthreadIntrospectionState) {
     // 创建
     SNKPthreadIntrospectionStateCreate = 1,

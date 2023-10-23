@@ -16,25 +16,6 @@
 #import <pthread.h>
 #import "context_helper.h"
 
-#pragma mark - TODO
-void getThreadStackInfo(thread_t thread, void **callStackAddresses, size_t *callStackSize) {
-    
-    thread_state_t state = (thread_state_t)malloc(sizeof(natural_t) * THREAD_STATE_MAX);
-    mach_msg_type_number_t stateCount = THREAD_STATE_MAX;
-    kern_return_t kr = thread_get_state(thread, j_threadStateByCPU(), state, &stateCount);
-    if (kr != KERN_SUCCESS) {
-        *callStackSize = 0;
-        const char *errorString = mach_error_string(kr);
-        printf("\nError: %s", errorString);
-        fflush(stdout);
-        return;
-    }
-    void *callStack[MAX_CALL_STACK_SIZE];
-    *callStackSize = backtrace(callStack, MAX_CALL_STACK_SIZE);
-    memcpy(callStackAddresses, callStack, *callStackSize * sizeof(void *));
-    free(state);
-}
-
 #pragma mark - CallStack
 
 typedef struct {

@@ -10,13 +10,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SNKBackTrace : NSObject
-@property (nonatomic, readonly, copy) NSArray <NSString *>*symbols;
-@property (nonatomic, readonly, copy) NSArray <NSString *>*addresses;
+@property (nonatomic, readonly, strong) NSMutableArray <NSString *>*fnames;
+@property (nonatomic, readonly, strong) NSMutableArray <NSString *>*addresses;
+@property (nonatomic, readonly, strong) NSMutableArray <NSString *>*symbols;
+@property (nonatomic, readonly, strong) NSMutableArray <NSNumber *>*offsets;
 @property (nonatomic, readonly, copy) NSString *symbolsDescription;
-// TODO: 以NSObject对象的形式保存调用栈及地址信息
+@property (nonatomic, readonly, assign) thread_t thread;
+@property (nonatomic, readonly, copy) NSString *queueName;
 + (instancetype)backTraceWith:(thread_t)thread;
-
-+ (NSString *)callStackSymbolsDescription:(thread_t)thread;
 @end
 
 NS_ASSUME_NONNULL_END

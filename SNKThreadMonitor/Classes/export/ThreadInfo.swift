@@ -15,7 +15,7 @@ public protocol ThreadInfoProviding {
     var description: String { get }
 }
 
-public struct MachInfoProvider: ThreadInfoProviding {
+public struct MachInfoProvider: ThreadInfoProviding, Hashable {
     public typealias T = MachThread
     // 由操作系统内核维护管理的线程端口号
     public var thread: MachThread
@@ -48,7 +48,7 @@ public struct MachInfoProvider: ThreadInfoProviding {
     
     // 调用堆栈信息
     public var backTraceDesc: String {
-        return SNKBackTrace.callStackSymbolsDescription(thread)
+        return SNKBackTrace(thread).symbolsDescription
     }
     
     public var isActive: Bool { machState == .running || machState == .uninterruptible }

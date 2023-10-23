@@ -30,26 +30,36 @@ extension ThreadMonitor {
         // 获取当前应用程序的线程列表
         get_thread_list(&threadList, &threadCount)
         let thisThread = MachThread(thread_self())
-        var threadDescDict = NSMutableDictionary()
-        var threadWaitDict = NSMutableDictionary()
+        let threadWaitDict = NSMutableDictionary()
         for i in 0 ..< Int(threadCount) {
             let machPointer = threadList![i]
             let info = MachInfoProvider(machPointer)
-//            mach_check_thread_dead_lock(machPointer, machPointer.identifierInfo, machPointer.extendInfo)
             $_activeThreadInfo.append(info)
             if machPointer != thisThread {
-                mach_check_thread_dead_lock(machPointer, threadDescDict, threadWaitDict)
+                mach_check_thread_dead_lock(machPointer, threadWaitDict)
             }
         }
-        if threadWaitDict.count > 0 {
-            //需要判断死锁
-            checkIfIsCircleWithThreadDescDic(threadDescDict, threadWaitDict)
+        
+        if threadWaitDict.count > 0, checkIfIsCircleWithThreadWaitDic(threadWaitDict), let threadWaitDict = threadWaitDict as? [UInt64: [UInt64]] {
+            $_activeThreadInfo.read { infos in
+                var deadLockInfos = [MachInfoProvider: [MachInfoProvider]]()
+                // 存在锁等待
+                threadWaitDict.forEach { key, value in
+                    if let holdingInfo = infos.first(where: { $0.identifierInfo.thread_id == key }) {
+                        let waitingInfos = value.compactMap { holding in
+                            return infos.first(where: { $0.identifierInfo.thread_id == holding })
+                        }
+                        deadLockInfos[holdingInfo] = waitingInfos
+                    }
+                }
+                self.notifyDelegates(.infos(.deadLockDetached(infos, deadLockInfos: deadLockInfos)))
+            }
         }
-        // 释放线程列表内存
-        deallocate_thread_list(threadList, threadCount)
         $_activeThreadInfo.read {
             NotificationCenter.default.post(name: ThreadMonitor.SNKThreadInfoDidUpdatedNotification, object: $0)
             self.notifyDelegates(.infos(.updateAll($0)))
         }
+        // 释放线程列表内存
+        deallocate_thread_list(threadList, threadCount)
     }
 }

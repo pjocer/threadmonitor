@@ -10,48 +10,36 @@
 #import "back_trace.h"
 #import <execinfo.h>
 #import "context_helper.h"
+#import "mach.h"
 
 @interface SNKBackTrace()
-@property (nonatomic, readwrite, copy) NSArray <NSString *>*symbols;
-@property (nonatomic, readwrite, copy) NSArray <NSString *>*addresses;
+@property (nonatomic, readwrite, strong) NSMutableArray <NSString *>*fnames;
+@property (nonatomic, readwrite, strong) NSMutableArray <NSString *>*addresses;
+@property (nonatomic, readwrite, strong) NSMutableArray <NSString *>*symbols;
+@property (nonatomic, readwrite, strong) NSMutableArray <NSNumber *>*offsets;
+@property (nonatomic, readwrite, assign) thread_t thread;
 @property (nonatomic, readwrite, copy) NSString *symbolsDescription;
+@property (nonatomic, readwrite, copy) NSString *queueName;
 @end
 
 @implementation SNKBackTrace
 
 + (instancetype)backTraceWith:(thread_t)thread {
-    SNKBackTrace *bt = [SNKBackTrace new];
-    void *callStackAddresses[MAX_CALL_STACK_SIZE];
-    size_t callStackSize = 0;
-    getThreadStackInfo(thread, callStackAddresses, &callStackSize);
-    NSMutableArray<NSString *> *symbolsArray = [NSMutableArray array];
-    NSMutableArray<NSString *> *addressesArray = [NSMutableArray array];
-    for (size_t i = 0; i < callStackSize; i++) {
-        void *addr = callStackAddresses[i];
-        if (addr != NULL) {
-            Dl_info info;
-            if (dladdr(addr, &info) != 0) {
-                NSString *symbol = [NSString stringWithUTF8String:info.dli_sname];
-                [symbolsArray addObject:symbol];
-            }
-            NSString *address = [NSString stringWithFormat:@"%p", addr];
-            [addressesArray addObject:address];
-        }
-    }
-    bt.symbols = [symbolsArray copy];
-    bt.addresses = [addressesArray copy];
-    NSMutableString *description = [NSMutableString stringWithString:@"Call symbols and addresses:"];
-    [bt.symbols enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [description appendFormat:@"\n%@:%@", bt.addresses[idx], obj];
-    }];
-    bt.symbolsDescription = description;
-    return bt;
+    SNKBackTrace *instance = [SNKBackTrace new];
+    instance.fnames = [NSMutableArray arrayWithCapacity:MAX_CALL_STACK_SIZE];
+    instance.addresses = [NSMutableArray arrayWithCapacity:MAX_CALL_STACK_SIZE];
+    instance.symbols = [NSMutableArray arrayWithCapacity:MAX_CALL_STACK_SIZE];
+    instance.offsets = [NSMutableArray arrayWithCapacity:MAX_CALL_STACK_SIZE];
+    instance.thread = thread;
+//    instance.queueName = machthrea
+    instance.symbolsDescription = [instance callStackSymbolsDescription];
+    return instance;
 }
 
-+ (NSString *)callStackSymbolsDescription:(thread_t)thread {
+- (NSString *)callStackSymbolsDescription {
     _STRUCT_MCONTEXT machineContext;
-    if (!getMachineContext(thread, &machineContext)) {
-        return [NSString stringWithFormat:@"Error: fail get thread(%u) state", thread];
+    if (!getMachineContext(_thread, &machineContext)) {
+        return [NSString stringWithFormat:@"Error: fail get thread(%u) state", _thread];
     }
     
     uintptr_t pc = j_machInstructionPointerByCPU(&machineContext);
@@ -69,9 +57,9 @@
             break;
         }
     }
-    return generateSymbol(pcArr, i, thread);
+    return [self generateSymbol:pcArr arrLen:i];
 }
-NSString *generateSymbol(uintptr_t *pcArr, int arrLen, thread_t thread) {
+- (NSString *)generateSymbol:(uintptr_t *)pcArr arrLen:(int)arrLen {
     pj_call_stack_info_t *csInfo = (pj_call_stack_info_t *)malloc(sizeof(pj_call_stack_info_t));
     if (csInfo == NULL) {
         return @"malloc fail";
@@ -84,15 +72,15 @@ NSString *generateSymbol(uintptr_t *pcArr, int arrLen, thread_t thread) {
         return @"malloc fail";
     }
     callStackOfSymbol(pcArr, arrLen, csInfo);
-    NSMutableString *strM = [NSMutableString stringWithFormat:@"CallStack of thread: %u\n", thread];
+    NSMutableString *strM = [NSMutableString string];
     for (int j = 0; j < csInfo->length; j++) {
-        [strM appendFormat:@"%@", formatFuncInfo(csInfo->stacks[j])];
+        [strM appendFormat:@"%@", [self formatFuncInfo:csInfo->stacks[j]]];
     }
     freeMemory(csInfo);
     return strM.copy;
 }
 
-NSString *formatFuncInfo(pj_func_info_t info) {
+- (NSString *)formatFuncInfo:(pj_func_info_t)info {
     if (info.symbol == NULL) {
         return @"";
     }
@@ -103,6 +91,10 @@ NSString *formatFuncInfo(pj_func_info_t info) {
     } else {
         fname = [NSString stringWithFormat:@"%-30s", lastPath+1];
     }
+    [_fnames addObject:fname];
+    [_offsets addObject:@(info.offset)];
+    [_addresses addObject:[NSString stringWithFormat:@"0x%08" PRIxPTR "", (uintptr_t)info.addr]];
+    [_symbols addObject:[NSString stringWithFormat:@"%s", info.symbol]];
     return [NSString stringWithFormat:@"%@ 0x%08" PRIxPTR " %s  +  %llu\n", fname, (uintptr_t)info.addr, info.symbol, info.offset];
 }
 @end

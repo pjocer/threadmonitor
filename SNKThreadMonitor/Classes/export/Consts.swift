@@ -102,6 +102,7 @@ public extension ThreadMonitorNotifyProviding {
 // infos: ThreadMonitor.recordedThreadInfo
 public protocol ThreadMonitorInfosProviding: AnyObject {
     func threadMonitorDidReceiveInfosUpdated(_ infos: [MachInfoProvider])
+    func threadMonitorDidReceiveInfosDeadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider: [MachInfoProvider]])
 }
 
 // 线程内省状态回调
