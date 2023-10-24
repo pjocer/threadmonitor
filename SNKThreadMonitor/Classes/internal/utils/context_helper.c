@@ -51,6 +51,7 @@ uintptr_t j_machInstructionPointerByCPU(mcontext_t const machineContext) {
     return machineContext->__ss.__eip;
 #endif
 }
+
 uintptr_t j_machFramePointerByCPU(mcontext_t const machineContext) {
     //Instruction pointer. Holds the program counter, the current instruction address.
 #if defined(__arm64__)
@@ -70,8 +71,9 @@ uintptr_t j_machLinkerPointerByCPU(mcontext_t const machineContext) {
 #elif defined(__arm__)
     return machineContext->__ss.__lr;
 #elif defined(__x86_64__)
-    return machineContext->__ss.__rlr;
+    return machineContext->__ss.__rip;
 #elif defined(__i386__)
-    return machineContext->__ss.__elr;
+    return machineContext->__ss.__eip;
 #endif
 }
+
