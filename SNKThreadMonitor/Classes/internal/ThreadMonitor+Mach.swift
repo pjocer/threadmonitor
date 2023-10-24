@@ -45,9 +45,9 @@ extension ThreadMonitor {
                 var deadLockInfos = [MachInfoProvider: [MachInfoProvider]]()
                 // 存在锁等待
                 threadWaitDict.forEach { key, value in
-                    if let holdingInfo = infos.first(where: { $0.identifierInfo.thread_id == key }) {
-                        let waitingInfos = value.compactMap { holding in
-                            return infos.first(where: { $0.identifierInfo.thread_id == holding })
+                    if let holdingInfo = infos.first(where: { $0.identifierInfo?.thread_id == key }) {
+                        let waitingInfos = value.compactMap { waiting in
+                            return infos.first(where: { $0.identifierInfo?.thread_id == waiting })
                         }
                         deadLockInfos[holdingInfo] = waitingInfos
                     }

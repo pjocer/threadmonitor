@@ -11,23 +11,29 @@ extension MachThread {
         return MachThread(thread_self())
     }
     
-    var basicInfo: MachBasicInfo {
+    var basicInfo: MachBasicInfo? {
         // 获取线程基本信息
         var threadBasicInfo = thread_basic_info()
-        generate_basic_info(self, &threadBasicInfo)
-        return threadBasicInfo
+        if generate_basic_info(self, &threadBasicInfo) {
+            return threadBasicInfo
+        }
+        return nil
     }
-    var identifierInfo: MachIdentifierInfo {
+    var identifierInfo: MachIdentifierInfo? {
         // 获取线程标识信息
         var threadIdentifierInfo = thread_identifier_info()
-        generate_identifier_info(self, &threadIdentifierInfo)
-        return threadIdentifierInfo
+        if generate_identifier_info(self, &threadIdentifierInfo) {
+            return threadIdentifierInfo
+        }
+        return nil
     }
-    var extendInfo: MachExtendedInfo {
+    var extendInfo: MachExtendedInfo? {
         // 获取线程扩展信息
         var threadExtendedInfo = thread_extended_info()
-        generate_extended_info(self, &threadExtendedInfo)
-        return threadExtendedInfo
+        if generate_extended_info(self, &threadExtendedInfo) {
+            return threadExtendedInfo
+        }
+        return nil
     }
     var name: String {
         var buffer = [Int8](repeating: 0, count: 128)
