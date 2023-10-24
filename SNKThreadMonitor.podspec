@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/Jocer/SNKThreadMonitor'
+  s.homepage         = 'https://git.17zjh.com/snakeGame-iOS/snkthreadmonitor'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jocer' => 'pjocer@outlook.com' }
-  s.source           = { :git => 'https://github.com/Jocer/SNKThreadMonitor.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@git.17zjh.com:snakeGame-iOS/snkthreadmonitor.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.module_name = 'SNKThreadMonitor'
   s.ios.deployment_target = '11.0'
