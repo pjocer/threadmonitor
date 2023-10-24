@@ -31,17 +31,23 @@
     instance.symbols = [NSMutableArray arrayWithCapacity:MAX_CALL_STACK_SIZE];
     instance.offsets = [NSMutableArray arrayWithCapacity:MAX_CALL_STACK_SIZE];
     instance.thread = thread;
-    struct thread_identifier_info idInfo;
-    generate_identifier_info(thread, &idInfo);
-    char buffer[256];
-    if (mach_thread_get_queue_name(idInfo, &buffer, 256)) {
-        NSString *queueName = [[NSString alloc] initWithCString:buffer encoding:NSUTF8StringEncoding];
-        instance.queueName = queueName;
-    } else {
-        instance.queueName = @"Null";
-    }
     instance.symbolsDescription = [instance callStackSymbolsDescription];
     return instance;
+}
+
+- (NSString *)queueName {
+    if (!_queueName) {
+        struct thread_identifier_info idInfo;
+        generate_identifier_info(_thread, &idInfo);
+        char buffer[256];
+        if (mach_thread_get_queue_name(idInfo, buffer, 256)) {
+            NSString *queueName = [[NSString alloc] initWithCString:buffer encoding:NSUTF8StringEncoding];
+            _queueName = queueName;
+        } else {
+            _queueName = @"Null";
+        }
+    }
+    return _queueName;
 }
 
 - (NSString *)callStackSymbolsDescription {

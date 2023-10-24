@@ -53,7 +53,7 @@ bool mach_thread_get_queue_name(struct thread_identifier_info info, char* const 
     //thread_handle shouldn't be 0 also, because
     //identifier_info->dispatch_qaddr =  identifier_info->thread_handle + get_dispatchqueue_offset_from_proc(thread->task->bsd_info);
     if(dispatch_queue_ptr == NULL || idInfo->thread_handle == 0 || *dispatch_queue_ptr == NULL) {
-        printf("This thread doesn't have a dispatch queue attached");
+        // 无队列
         return false;
     }
     

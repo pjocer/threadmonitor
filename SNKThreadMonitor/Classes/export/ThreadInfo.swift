@@ -78,12 +78,18 @@ public struct POSIXInfoProvider: ThreadInfoProviding {
     
     public var description: String {
         let string = "\nState:\(introspectionState?.desc ?? "Unknown")\nPOSIX Address:\(thread)"
-//        let string = "\nMach-State:\(machStateDesc)\nQueue Address:\(identifierInfo.dispatch_qaddr)\nThread ID:\(identifierInfo.thread_id)\nThread Mach-Port:\(thread)\nFlag:\(flagDesc)\nSuspend Count:\(basicInfo.suspend_count)\nSleep Time:\(basicInfo.sleep_time)\nName:\(name)\nCPU Usage:\(cpuUsage)"
-//        return string
         return string
     }
     public init(_ value: POSIXThread, state: ThreadIntrospectionState?) {
         self.thread = value
         self.introspectionState = state
+    }
+    
+    public var machInfoProvider: MachInfoProvider? {
+        let machThread = pthread_mach_thread_np(thread)
+        if machThread > 0 {
+            return MachInfoProvider(machThread)
+        }
+        return nil
     }
 }
