@@ -48,8 +48,9 @@ public enum Indicator: IndicatorType {
         case let .deadLock(type):
             switch type {
             case .mutex(let h, _):
-                guard let t = SNKBackTrace(h.thread).symbols.firstObject as? String else { return "Null" }
-                return t
+                let t = SNKBackTrace(h.thread)
+                guard let s = t.symbols.firstObject as? String else { return "Null" }
+                return "\(t.thread)(\(t.thread.name)\(t.queueName)):\(s)"
             }
         case .priorityInversion:
             return "优先级反转"
