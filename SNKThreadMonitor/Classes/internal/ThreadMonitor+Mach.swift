@@ -42,17 +42,15 @@ extension ThreadMonitor {
         
         if threadWaitDict.count > 0, checkIfIsCircleWithThreadWaitDic(threadWaitDict), let threadWaitDict = threadWaitDict as? [UInt64: [UInt64]] {
             $_activeThreadInfo.read { infos in
-                var deadLockInfos = [MachInfoProvider: [MachInfoProvider]]()
                 // 存在锁等待
                 threadWaitDict.forEach { key, value in
                     if let holdingInfo = infos.first(where: { $0.identifierInfo?.thread_id == key }) {
                         let waitingInfos = value.compactMap { waiting in
                             return infos.first(where: { $0.identifierInfo?.thread_id == waiting })
                         }
-                        deadLockInfos[holdingInfo] = waitingInfos
+                        self.notifyDelegates(.indicator(Indicator.deadLock(.mutex(SNKBackTrace(holdingInfo.thread), waitingInfos.compactMap{ SNKBackTrace($0.thread) }))))
                     }
                 }
-                self.notifyDelegates(.infos(.deadLockDetached(infos, deadLockInfos: deadLockInfos)))
             }
         }
         $_activeThreadInfo.read {

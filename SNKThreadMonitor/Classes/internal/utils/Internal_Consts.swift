@@ -13,7 +13,6 @@ enum ThreadMonitorDelegateFunction {
     }
     enum Infos {
         case updateAll(_ infos: [MachInfoProvider])
-        case deadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider: [MachInfoProvider]])
     }
     enum State {
         case changed(_ info: POSIXInfoProvider)
@@ -25,4 +24,5 @@ enum ThreadMonitorDelegateFunction {
     case notify(_ type: Notify)
     case infos(_ type: Infos)
     case state(_ type: State)
+    case indicator(_ type: IndicatorType)
 }

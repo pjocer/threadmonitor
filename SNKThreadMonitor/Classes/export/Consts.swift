@@ -102,12 +102,20 @@ public extension ThreadMonitorNotifyProviding {
 // infos: ThreadMonitor.recordedThreadInfo
 public protocol ThreadMonitorInfosProviding: AnyObject {
     func threadMonitorDidReceiveInfosUpdated(_ infos: [MachInfoProvider])
-    func threadMonitorDidReceiveInfosDeadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider: [MachInfoProvider]])
 }
 
 public extension ThreadMonitorInfosProviding {
     func threadMonitorDidReceiveInfosUpdated(_ infos: [MachInfoProvider]) {}
-    func threadMonitorDidReceiveInfosDeadLockDetached(_ infos: [MachInfoProvider], deadLockInfos: [MachInfoProvider: [MachInfoProvider]]) {}
+}
+
+// 触发阈值
+public protocol ThreadMonitorIndicatorDetachedProviding: AnyObject {
+    func threadMonitorDidReceiveIndicatorDetached(_ indicator: IndicatorType)
+    func threadMonitorDidReceiveInfosMutexDeadLockDetached(_ holding: SNKBackTrace, waitings: [SNKBackTrace])
+}
+public extension ThreadMonitorIndicatorDetachedProviding {
+    func threadMonitorDidReceiveIndicatorDetached(_ indicator: IndicatorType) {}
+    func threadMonitorDidReceiveInfosMutexDeadLockDetached(_ holding: SNKBackTrace, waitings: [SNKBackTrace]) {}
 }
 
 // 线程内省状态回调
@@ -131,12 +139,14 @@ public protocol ThreadMonitorDelegate: AnyObject {
     var threadNotifyDelegate: ThreadMonitorNotifyProviding? { get }
     var threadInfosDelegate: ThreadMonitorInfosProviding? { get }
     var threadStateDelegate: ThreadMonitorIntrospectionStateProviding? { get }
+    var indicatorDetachedDelegate: ThreadMonitorIndicatorDetachedProviding? { get }
 }
 
 public extension ThreadMonitorDelegate {
     var threadNotifyDelegate: ThreadMonitorNotifyProviding? { nil }
     var threadInfosDelegate: ThreadMonitorInfosProviding? { nil }
     var threadStateDelegate: ThreadMonitorIntrospectionStateProviding? { nil }
+    var indicatorDetachedDelegate: ThreadMonitorIndicatorDetachedProviding? { nil }
 }
 
 // 通知

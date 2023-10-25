@@ -49,8 +49,6 @@ extension ThreadMonitor {
                 switch type {
                 case .updateAll(let infos):
                     $0.threadInfosDelegate?.threadMonitorDidReceiveInfosUpdated(infos)
-                case let .deadLockDetached(infos, deadLockInfos):
-                    $0.threadInfosDelegate?.threadMonitorDidReceiveInfosDeadLockDetached(infos, deadLockInfos: deadLockInfos)
                 }
             case .notify(let type):
                 switch type {
@@ -73,6 +71,22 @@ extension ThreadMonitor {
                     $0.threadStateDelegate?.threadMonitorDidReceiveThreadFinished(info)
                 case .destory(let info):
                     $0.threadStateDelegate?.threadMonitorDidReceiveThreadDestroied(info)
+                }
+            case .indicator(let type):
+                $0.indicatorDetachedDelegate?.threadMonitorDidReceiveIndicatorDetached(type)
+                guard let type = type as? Indicator else { return }
+                switch type {
+                case .deadLock(let t):
+                    switch t {
+                    case let .mutex(holding, waitings):
+                        $0.indicatorDetachedDelegate?.threadMonitorDidReceiveInfosMutexDeadLockDetached(holding, waitings: waitings)
+                    }
+                case .priorityInversion:
+                    break
+                case .longWaiting:
+                    break
+                case .longRunning:
+                    break
                 }
             }
         }
