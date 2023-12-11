@@ -18,6 +18,10 @@ public final class ThreadMonitor {
     internal var _mainThread: MachThread?
     public var mainThread: MachThread? { _mainThread }
     
+    // 主队列
+    internal var _mainQueueName: String?
+    public var mainQueueName: String? { _mainQueueName }
+    
     // 活跃线程
     @Protected
     internal var _activeThreadInfo: [MachInfoProvider] = [MachInfoProvider]()
@@ -84,6 +88,7 @@ extension ThreadMonitor {
             if result == 0 {
                 throw ThreadMonitorError.getMachThreadBoundToPThreadFailed
             } else {
+                _mainQueueName = result.identifierInfo?.queueName
                 return result
             }
         } else {

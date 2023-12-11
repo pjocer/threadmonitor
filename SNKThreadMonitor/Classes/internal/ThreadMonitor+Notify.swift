@@ -42,52 +42,54 @@ extension ThreadMonitor {
 extension ThreadMonitor {
     // 代理回调
     func notifyDelegates(_ `func`: ThreadMonitorDelegateFunction) {
-        delegates.allObjects.compactMap { $0 as? ThreadMonitorDelegate }.forEach {
-            switch `func` {
-            case .infos(let type):
-                switch type {
-                case .updateAll(let infos):
-                    $0.threadInfosDelegate?.threadMonitorDidReceiveInfosUpdated(infos)
-                }
-            case .notify(let type):
-                switch type {
-                case let .willExit(thread, info):
-                    $0.threadNotifyDelegate?.threadMonitorDidReceiveWillExit(thread: thread, info: info)
-                case .willBecomeMulti:
-                    $0.threadNotifyDelegate?.threadMonitorDidReceiveWillBecomeMulti()
-                case .didBecomeSingle:
-                    $0.threadNotifyDelegate?.threadMonitorDidReceiveDidBecomeSingle()
-                }
-            case .state(let type):
-                switch type {
-                case let .changed(info):
-                    $0.threadStateDelegate?.threadMonitorDidReceiveStateChanged(info)
-                case .create(let info):
-                    $0.threadStateDelegate?.threadMonitorDidReceiveThreadCreated(info)
-                case .start(let info):
-                    $0.threadStateDelegate?.threadMonitorDidReceiveThreadStarted(info)
-                case .finish(let info):
-                    $0.threadStateDelegate?.threadMonitorDidReceiveThreadFinished(info)
-                case .destory(let info):
-                    $0.threadStateDelegate?.threadMonitorDidReceiveThreadDestroied(info)
-                }
-            case .indicator(let type):
-                $0.indicatorDetachedDelegate?.threadMonitorDidReceiveIndicatorDetached(type)
-                guard let type = type as? Indicator else { return }
-                switch type {
-                case .deadLock(let t):
-                    switch t {
-                    case let .mutex(holding, waitings):
-                        $0.indicatorDetachedDelegate?.threadMonitorDidReceiveInfosMutexDeadLockDetached(holding, waitings: waitings)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegates.allObjects.compactMap { $0 as? ThreadMonitorDelegate }.forEach {
+                switch `func` {
+                case .infos(let type):
+                    switch type {
+                    case .updateAll(let infos):
+                        $0.threadInfosDelegate?.threadMonitorDidReceiveInfosUpdated(infos)
                     }
-                case .priorityInversion:
-                    break
-                case .longWaiting:
-                    break
-                case .longRunning:
-                    break
-                case .highCPUUsage(let t):
-                    break
+                case .notify(let type):
+                    switch type {
+                    case let .willExit(thread, info):
+                        $0.threadNotifyDelegate?.threadMonitorDidReceiveWillExit(thread: thread, info: info)
+                    case .willBecomeMulti:
+                        $0.threadNotifyDelegate?.threadMonitorDidReceiveWillBecomeMulti()
+                    case .didBecomeSingle:
+                        $0.threadNotifyDelegate?.threadMonitorDidReceiveDidBecomeSingle()
+                    }
+                case .state(let type):
+                    switch type {
+                    case let .changed(info):
+                        $0.threadStateDelegate?.threadMonitorDidReceiveStateChanged(info)
+                    case .create(let info):
+                        $0.threadStateDelegate?.threadMonitorDidReceiveThreadCreated(info)
+                    case .start(let info):
+                        $0.threadStateDelegate?.threadMonitorDidReceiveThreadStarted(info)
+                    case .finish(let info):
+                        $0.threadStateDelegate?.threadMonitorDidReceiveThreadFinished(info)
+                    case .destory(let info):
+                        $0.threadStateDelegate?.threadMonitorDidReceiveThreadDestroied(info)
+                    }
+                case .indicator(let type):
+                    $0.indicatorDetachedDelegate?.threadMonitorDidReceiveIndicatorDetached(type)
+                    guard let type = type as? Indicator else { return }
+                    switch type {
+                    case .deadLock(let t):
+                        switch t {
+                        case let .mutex(holding, waitings):
+                            $0.indicatorDetachedDelegate?.threadMonitorDidReceiveInfosMutexDeadLockDetached(holding, waitings: waitings)
+                        }
+                    case .priorityInversion:
+                        break
+                    case .longWaiting:
+                        break
+                    case .longRunning:
+                        break
+                    case .highCPUUsage(let t):
+                        break
+                    }
                 }
             }
         }

@@ -89,9 +89,8 @@ public enum Indicator: IndicatorType {
         case let .deadLock(type):
             switch type {
             case let .mutex(h, ws):
-                let hp = MachInfoProvider(h.thread)
-                let wsp = ws.map{ MachInfoProvider($0.thread) }.reduce("") { $0 + $1.description + "\n" }
-                return "HoldingThreadInfo:\(hp.description)\nWaitingThreadInfos:\(wsp)"
+                let wsp = ws.reduce("") { $0 + "\($1.thread)(\($1.threadName) in \($1.queueName))" + "\n" }
+                return "HoldingThreadInfo:\(h.thread)(\(h.threadName) in \(h.queueName))\nWaitingThreadInfos:\(wsp)"
             }
         case .priorityInversion:
             return ""
@@ -102,9 +101,9 @@ public enum Indicator: IndicatorType {
         case .highCPUUsage(let t):
             switch t {
             case let .thread(p, _):
-                return "ThreadInfo:\n\(p.description)"
+                return ""
             case let .process(ps, _):
-                return ps.reduce("ProcessThreadsInfo:\n") { $0 + $1.description + "\n" }
+                return ps.reduce("ProcessThreadsInfo:\n") { $0 + "\($1.thread)(\($1.thread.name) in \($1.thread.identifierInfo?.queueName ?? "")):\($1.thread.basicInfo?.cpuUsage ?? "")" + "\n" }
             }
         }
     }

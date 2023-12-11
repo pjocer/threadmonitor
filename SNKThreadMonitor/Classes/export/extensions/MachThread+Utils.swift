@@ -12,7 +12,7 @@ public extension MachThread {
     }
     
     public var isMainThread: Bool {
-        return self == ThreadMonitor.shared.mainThread
+        return self == ThreadMonitor.shared.mainThread || self.identifierInfo?.queueName == ThreadMonitor.shared.mainQueueName
     }
     
     public var basicInfo: MachBasicInfo? {

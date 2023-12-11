@@ -42,16 +42,23 @@ extension ThreadMonitor {
                 let cpuUsage = Float(basicInfo.cpu_usage)
                 let usagePercent = cpuUsage / Float(TH_USAGE_SCALE)
                 totalCPUUsage += usagePercent
-                if machPointer.isMainThread, usagePercent >= config.mainThreadCPUThreshold {
-                    self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
-                } else if usagePercent >= config.threadCPUThreshold {
-                    self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                if machPointer.isMainThread {
+                    if usagePercent >= config.mainThreadCPUThreshold {
+                        self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                    }
+                } else {
+                    if usagePercent >= config.threadCPUThreshold {
+                        self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                    }
                 }
             }
             mach_check_thread_dead_lock(machPointer, threadWaitDict)
         }
         if totalCPUUsage >= config.processCPUThreshold {
-            self.notifyDelegates(.indicator(Indicator.highCPUUsage(.process($_activeThreadInfo.wrappedValue, usage: totalCPUUsage))))
+            let sorted = $_activeThreadInfo.wrappedValue.sorted { left, right in
+                (left.thread.basicInfo?.cpu_usage ?? 0) > (right.thread.basicInfo?.cpu_usage ?? 0)
+            }
+            self.notifyDelegates(.indicator(Indicator.highCPUUsage(.process(sorted, usage: totalCPUUsage))))
         }
         checkIfDeadLock(threadWaitDict)
         $_activeThreadInfo.read {
