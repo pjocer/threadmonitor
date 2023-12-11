@@ -88,7 +88,7 @@ public enum ThreadFlagsType: Int {
 
 public struct ThreadMonitorConfig {
     
-    static let `default` = ThreadMonitorConfig(frequency: 3, mainThreadCPUThreshold: 1, threadCPUThreshold: 0.5, processCPUThreshold: 1)
+    static let `default` = ThreadMonitorConfig(frequency: 3, mainThreadCPUThreshold: 1, threadCPUThreshold: 0.6, processCPUThreshold: 2.5)
     
     // 监控频率（不建议配置太高的频率，使用过高的频率会导致过高的CPU和资源占用）
     public var frequency: TimeInterval
