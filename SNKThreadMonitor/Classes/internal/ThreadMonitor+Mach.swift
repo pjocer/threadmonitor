@@ -10,16 +10,19 @@ extension ThreadMonitor {
     // 当前线程的信息
     var currentMachInfo: MachInfoProvider { .init(.current) }
     // 启动全局监控的定时器（频率：frequency）
-    func startMonitorringTimer() {
-        timer.schedule(deadline: .now(), repeating: .seconds(Int(frequency)), leeway: .milliseconds(100))
-        timer.setEventHandler(qos: .default, flags: .barrier) {
+    func startMonitorringTimer() throws {
+        if let timer = timer { throw ThreadMonitorError.startMonitoringTwice }
+        timer = DispatchSource.makeTimerSource(queue: monitorQueue)
+        timer?.schedule(deadline: .now(), repeating: .seconds(Int(config.frequency)), leeway: .milliseconds(100))
+        timer?.setEventHandler(qos: .default, flags: .barrier) {
             self.updateAllThreadInfoTask()
         }
-        timer.resume()
+        timer?.resume()
     }
     
     func stopMonitorringTimer() {
-        timer.cancel()
+        timer?.cancel()
+        timer = nil
     }
     
     // 更新线程信息
@@ -29,21 +32,43 @@ extension ThreadMonitor {
         $_activeThreadInfo.wrappedValue.removeAll()
         // 获取当前应用程序的线程列表
         get_thread_list(&threadList, &threadCount)
-        let thisThread = MachThread(thread_self())
         let threadWaitDict = NSMutableDictionary()
+        var totalCPUUsage: Float = 0
         for i in 0 ..< Int(threadCount) {
             let machPointer = threadList![i]
             let info = MachInfoProvider(machPointer)
             $_activeThreadInfo.append(info)
-            if machPointer != thisThread {
-                mach_check_thread_dead_lock(machPointer, threadWaitDict)
+            if let basicInfo = info.basicInfo {
+                let cpuUsage = Float(basicInfo.cpu_usage)
+                let usagePercent = cpuUsage / Float(TH_USAGE_SCALE)
+                totalCPUUsage += usagePercent
+                if machPointer.isMainThread, usagePercent >= config.mainThreadCPUThreshold {
+                    self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                } else if usagePercent >= config.threadCPUThreshold {
+                    self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                }
             }
+            mach_check_thread_dead_lock(machPointer, threadWaitDict)
         }
-        
-        if threadWaitDict.count > 0, checkIfIsCircleWithThreadWaitDic(threadWaitDict), let threadWaitDict = threadWaitDict as? [UInt64: [UInt64]] {
+        if totalCPUUsage >= config.processCPUThreshold {
+            self.notifyDelegates(.indicator(Indicator.highCPUUsage(.process($_activeThreadInfo.wrappedValue, usage: totalCPUUsage))))
+        }
+        checkIfDeadLock(threadWaitDict)
+        $_activeThreadInfo.read {
+            NotificationCenter.default.post(name: ThreadMonitor.SNKThreadInfoDidUpdatedNotification, object: $0)
+            self.notifyDelegates(.infos(.updateAll($0)))
+        }
+        // 释放线程列表内存
+        deallocate_thread_list(threadList, threadCount)
+    }
+}
+
+extension ThreadMonitor {
+    func checkIfDeadLock(_ waitingInfo: NSMutableDictionary) {
+        if waitingInfo.count > 0, checkIfIsCircleWithThreadWaitDic(waitingInfo), let waitingInfo = waitingInfo as? [UInt64: [UInt64]] {
             $_activeThreadInfo.read { infos in
                 // 存在锁等待
-                threadWaitDict.forEach { key, value in
+                waitingInfo.forEach { key, value in
                     if let holdingInfo = infos.first(where: { $0.identifierInfo?.thread_id == key }) {
                         let waitingInfos = value.compactMap { waiting in
                             return infos.first(where: { $0.identifierInfo?.thread_id == waiting })
@@ -53,11 +78,5 @@ extension ThreadMonitor {
                 }
             }
         }
-        $_activeThreadInfo.read {
-            NotificationCenter.default.post(name: ThreadMonitor.SNKThreadInfoDidUpdatedNotification, object: $0)
-            self.notifyDelegates(.infos(.updateAll($0)))
-        }
-        // 释放线程列表内存
-        deallocate_thread_list(threadList, threadCount)
     }
 }

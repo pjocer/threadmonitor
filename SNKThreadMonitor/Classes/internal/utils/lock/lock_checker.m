@@ -54,7 +54,7 @@ void checkMainEmptyCPUUsageWithWapped(thread_t thread, uint64_t thread_id, NSMut
         return;
     }
     //通过指令指针来获取当前指令地址
-    SNKBackTrace *backTrace = [SNKBackTrace backTraceWith:thread];
+    SNKBackTrace *backTrace = [SNKBackTrace backTraceWith:thread deep:1];
     NSMutableArray *symbols = backTrace.symbols;
     for (int i = 0; i < symbols.count; i++) {
         const char *cString = [symbols[i] UTF8String];
@@ -66,12 +66,14 @@ void checkMainEmptyCPUUsageWithWapped(thread_t thread, uint64_t thread_id, NSMut
             uint32_t *tid = mutex->psynch.m_tid;
             uint64_t hold_lock_thread_id = *tid;
             //需要判断死锁
-            NSMutableArray *array = threadWaitDic[@(hold_lock_thread_id)];
-            if (!array) {
-                array = [NSMutableArray array];
+            if (hold_lock_thread_id > 0) {
+                NSMutableArray *array = threadWaitDic[@(hold_lock_thread_id)];
+                if (!array) {
+                    array = [NSMutableArray array];
+                }
+                [array addObject:@(thread_id)];
+                threadWaitDic[@(hold_lock_thread_id)] = array;
             }
-            [array addObject:@(thread_id)];
-            threadWaitDic[@(hold_lock_thread_id)] = array;
             break;
         }
         

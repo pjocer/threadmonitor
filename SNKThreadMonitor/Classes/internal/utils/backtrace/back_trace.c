@@ -18,21 +18,11 @@
 
 #pragma mark - CallStack
 
-typedef struct {
-    const struct mach_header *header;
-    const char *name;
-    uintptr_t slide;
-} pj_mach_header_t;
-
-typedef struct {
-    pj_mach_header_t *array;
-    uint32_t allocLength;
-} pj_mach_header_arr_t;
-
 static pj_mach_header_arr_t *machHeaderArr = NULL;
 static pthread_mutex_t initLock = PTHREAD_MUTEX_INITIALIZER;
 static bool isInitialized = false;
 
+// 记录全部镜像地址的头部指针
 void getMachHeader(void) {
     machHeaderArr = (pj_mach_header_arr_t *)malloc(sizeof(pj_mach_header_arr_t));
     machHeaderArr->allocLength = _dyld_image_count();
@@ -46,6 +36,7 @@ void getMachHeader(void) {
     isInitialized = true;
 }
 
+
 void ensureInitialized(void) {
     if (!isInitialized) {
         pthread_mutex_lock(&initLock);
@@ -54,6 +45,7 @@ void ensureInitialized(void) {
     }
 }
 
+// PC是否在镜像内存中
 bool pcIsInMach(uintptr_t slidePC, const struct mach_header *header) {
     uintptr_t cur = (uintptr_t)(((struct mach_header_64*)header) + 1);
     for (uint32_t i = 0; i < header->ncmds; i++) {
@@ -71,6 +63,7 @@ bool pcIsInMach(uintptr_t slidePC, const struct mach_header *header) {
     return false;
 }
 
+// 从PC中获取对应的镜像头
 pj_mach_header_t *getPCInMach(uintptr_t pc) {
     ensureInitialized();
     for (uint32_t i = 0; i < machHeaderArr->allocLength; i++) {
@@ -126,8 +119,10 @@ void findPCSymbolInMach(uintptr_t pc, pj_mach_header_t *machHeader, pj_call_stac
         pj_func_info_t *funcInfo = &csInfo->stacks[csInfo->length++];
         funcInfo->machOName = machHeader->name;
         funcInfo->addr = symtab[best].n_value;
+        funcInfo->lr_addr = pc;
         funcInfo->offset = offset;
         funcInfo->symbol = (char *)(strtab + symtab[best].n_un.n_strx);
+        funcInfo->machImageHeader = (uintptr_t)header;
         if (*funcInfo->symbol == '_') {
             funcInfo->symbol++;
         }
@@ -139,8 +134,10 @@ void findPCSymbolInMach(uintptr_t pc, pj_mach_header_t *machHeader, pj_call_stac
 
 void callStackOfSymbol(uintptr_t *pcArr, int arrLen, pj_call_stack_info_t *csInfo) {
     for (int i = 0; i < arrLen; i++) {
+        // 匹配计数器中的镜像头部指针
         pj_mach_header_t *machHeader = getPCInMach(pcArr[i]);
         if (machHeader) {
+            // 从镜像内存中匹配对应的符号
             findPCSymbolInMach(pcArr[i], machHeader, csInfo);
         }
     }

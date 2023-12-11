@@ -22,8 +22,11 @@ extension ThreadMonitor {
         }
     }
     // 安装线程内省回调函数
-    func startThreadMonitorring() {
-        if instrospection_hook.shared().callback != nil { return }
+    func startThreadMonitorring() throws {
+        if instrospection_hook.shared().callback != nil {
+            throw ThreadMonitorError.startMonitoringTwice
+            return
+        }
         instrospection_hook.shared().setPthreadIntrospectionHookCallBack { [weak self] state, pthread, addr, size in
             // TODO: 通过addr偏移寻址，拿到对应的程序计数器信息
             self?.updatePOSIXInfo(with: state, pthread: pthread) { info in

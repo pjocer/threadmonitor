@@ -20,9 +20,11 @@ typedef struct {
 
 typedef struct {
     uint64_t addr;
+    uint64_t lr_addr;
     uint64_t offset;
     const char *symbol;
     const char *machOName;
+    uint64_t machImageHeader;
 } pj_func_info_t;
 
 typedef struct {
@@ -30,6 +32,17 @@ typedef struct {
     int allocLength;
     int length;
 } pj_call_stack_info_t;
+
+typedef struct {
+    const struct mach_header *header;
+    const char *name;
+    uintptr_t slide;
+} pj_mach_header_t;
+
+typedef struct {
+    pj_mach_header_t *array;
+    uint32_t allocLength;
+} pj_mach_header_arr_t;
 
 void callStackOfSymbol(uintptr_t *pcArr, int arrLen, pj_call_stack_info_t *csInfo);
 

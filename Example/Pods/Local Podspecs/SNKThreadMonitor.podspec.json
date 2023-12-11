@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "A short description of SNKThreadMonitor.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/Jocer/SNKThreadMonitor",
+  "homepage": "https://git.17zjh.com/snakeGame-iOS/snkthreadmonitor",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "Jocer": "pjocer@outlook.com"
   },
   "source": {
-    "git": "https://github.com/Jocer/SNKThreadMonitor.git",
+    "git": "git@git.17zjh.com:snakeGame-iOS/snkthreadmonitor.git",
     "tag": "0.1.0"
   },
   "module_name": "SNKThreadMonitor",

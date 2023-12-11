@@ -11,8 +11,12 @@ public final class ThreadMonitor {
     // 单例
     public static let shared = ThreadMonitor()
     
-    // 监控频率（不建议配置太高的频率，使用过高的频率会导致过高的CPU和资源占用）
-    public var frequency: TimeInterval = 3
+    // 监控配置
+    public var config: ThreadMonitorConfig = ThreadMonitorConfig.default
+    
+    // 主线程
+    internal var _mainThread: MachThread?
+    public var mainThread: MachThread? { _mainThread }
     
     // 活跃线程
     @Protected
@@ -22,10 +26,15 @@ public final class ThreadMonitor {
     }
     
     // 开始监控
-    public func startMonitoring() {
-        startThreadMonitorring()
-        startMonitorringTimer()
-        registerThreadStateNotify()
+    public func startMonitoring() throws {
+        do {
+            try startMonoringCheck()
+            try startThreadMonitorring()
+            try startMonitorringTimer()
+            registerThreadStateNotify()
+        } catch {
+            throw error
+        }
     }
     
     // 注册代理
@@ -50,11 +59,35 @@ public final class ThreadMonitor {
     }()
     
     // 定时器，用于定期更新线程信息
-    internal lazy var timer: DispatchSourceTimer = {
-        DispatchSource.makeTimerSource(queue: monitorQueue)
-    }()
+    internal var timer: DispatchSourceTimer?
     
     internal var delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
     
     private init() {}
+}
+
+extension ThreadMonitor {
+    func startMonoringCheck() throws {
+        do {
+            if _mainThread == nil {
+                _mainThread = try getMainMachThread()
+            }
+            // ...
+        } catch {
+            throw error
+        }
+    }
+    func getMainMachThread() throws -> MachThread {
+        let main = pthread_main_np()
+        if main != 0 {
+            let result = pthread_mach_thread_np(pthread_self())
+            if result == 0 {
+                throw ThreadMonitorError.getMachThreadBoundToPThreadFailed
+            } else {
+                return result
+            }
+        } else {
+            throw ThreadMonitorError.notInitialedInMain
+        }
+    }
 }

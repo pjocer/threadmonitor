@@ -86,6 +86,27 @@ public enum ThreadFlagsType: Int {
     }
 }
 
+public struct ThreadMonitorConfig {
+    
+    static let `default` = ThreadMonitorConfig(frequency: 3, mainThreadCPUThreshold: 1, threadCPUThreshold: 0.5, processCPUThreshold: 1)
+    
+    // 监控频率（不建议配置太高的频率，使用过高的频率会导致过高的CPU和资源占用）
+    public var frequency: TimeInterval
+    // 主线程的CPU占用率上报阈值
+    public var mainThreadCPUThreshold: Float
+    // 单一线程的CPU占用率上报阈值
+    public var threadCPUThreshold: Float
+    // 当前进程的CPU占用率上报阈值
+    public var processCPUThreshold: Float
+    
+    init(frequency: TimeInterval, mainThreadCPUThreshold: Float, threadCPUThreshold: Float, processCPUThreshold: Float) {
+        self.frequency = frequency
+        self.mainThreadCPUThreshold = mainThreadCPUThreshold
+        self.threadCPUThreshold = threadCPUThreshold
+        self.processCPUThreshold = processCPUThreshold
+    }
+}
+
 // NSThread定义的全局通知回调
 public protocol ThreadMonitorNotifyProviding: AnyObject {
     func threadMonitorDidReceiveWillExit(thread: Thread?, info: (any ThreadInfoProviding)?)

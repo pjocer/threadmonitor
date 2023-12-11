@@ -11,7 +11,6 @@ extension ThreadMonitor {
         NotificationCenter.default.addObserver(self, selector: #selector(threadWillExit(_:)), name: .NSThreadWillExit, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(threadWillBecomeMulti(_:)), name: .NSWillBecomeMultiThreaded, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(threadDidBecomeSingle(_:)), name: .NSDidBecomeSingleThreaded, object: nil);
-        
     }
     
     func unregisterThreadStateNotify() {
@@ -19,7 +18,7 @@ extension ThreadMonitor {
     }
     
     func searchFromSavedInfos(_ thread: Thread) -> MachInfoProvider? {
-        let info = $_activeThreadInfo.read { $0.first { $0.name == thread.name } }
+        let info = $_activeThreadInfo.read { $0.first { $0.thread.name == thread.name } }
         return info
     }
     
@@ -86,6 +85,8 @@ extension ThreadMonitor {
                 case .longWaiting:
                     break
                 case .longRunning:
+                    break
+                case .highCPUUsage(let t):
                     break
                 }
             }
