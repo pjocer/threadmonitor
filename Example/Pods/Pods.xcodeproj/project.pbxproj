@@ -7,136 +7,146 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		024D5ED6B6D60F3C6D1775C510225C76 /* mach.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F949362A309036783FDE86B756D61 /* mach.c */; };
-		05B6A87E1307234D450EBB00C40EAD4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		07E674642EB9E1CA7C8F4AA1DD965727 /* ThreadMonitor+POSIX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0520B029E5252E6600899CD256DFCE /* ThreadMonitor+POSIX.swift */; };
-		190E28B40A4B2914B373E804B4BE9C5B /* Internal_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE21AADE049AA2700678B6A6489384EC /* Internal_Consts.swift */; };
-		1DE52BE89F7F7A61B7B740899E774E89 /* back_trace.c in Sources */ = {isa = PBXBuildFile; fileRef = D2B569C0C55F75AEB9C27A96942DAF44 /* back_trace.c */; };
+		0726072E7C30A5F7AC20E6BA21211FEF /* POSIXThread+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C7AC1DBCDB81B622C7BF40C1AD10D8 /* POSIXThread+Utils.swift */; };
+		1F1D6DD21CBE1735AA0C26431AF96F23 /* lock_checker.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBF31FA2329E9BB8064BC4487946F15 /* lock_checker.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2462E1ADB66704A3A48FD7FB07A642C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		25B157E1546C8A20C0C328689FD571DB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE2050C3A227701184FFE6652EFD123 /* Consts.swift */; };
+		24CBEF5C0839B1CC4C1A1226B0E0D7AB /* lock_indicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 793E77BB5BA3B3F138C46BA7CF5125AB /* lock_indicator.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2812BD9F750F826B1535FBE95D123984 /* ThreadMonitor+Mach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B1E8DC473E4D268FE29C8D5625911B /* ThreadMonitor+Mach.swift */; };
 		2A3C78948C252F4F6CAB7AD5F3CA788E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		2BD9A4422A875F78456D19A75EE39830 /* Pods-SNKThreadMonitor_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 412C8DA1C066031CB93C66D89A43814D /* Pods-SNKThreadMonitor_Example-dummy.m */; };
-		2E9ED09B7F79993398856E84AAA9E260 /* lock_indicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 91326047E3DF9971E04E8FC57CC3D2E1 /* lock_indicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		325CCDB295FFA016638075B5D2CEDD5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		338643C9C1725123FB690D93697A2717 /* ThreadMonitor+Mach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B3F0A1EAD95C324F839383B1EA6C4 /* ThreadMonitor+Mach.swift */; };
-		37F6320413316836E736AC13F3F0D5CF /* ThreadMonitor+Notify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EFED95DF2BA8093859DB8E9C0C46CE /* ThreadMonitor+Notify.swift */; };
-		4EF21C9FE7C174B9BC4E4E083E1FD2BB /* SNKBackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EF96522845B313816FEC531AD50542C /* SNKBackTrace.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DBA0C9F5F3B778FB1A3FFB7E43192 /* ThreadMonitor+Notify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B3A1097D30069AA4A0AB85F21BEF7B /* ThreadMonitor+Notify.swift */; };
+		40DFE9DE682EF449AB19A9DDA9F61B57 /* lock_indicator.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F54AF0C69D3EF7336DC3B441F1B5243 /* lock_indicator.c */; };
+		44FC61A5B1CC1CB902D2A03FF5B5E31F /* mach.h in Headers */ = {isa = PBXBuildFile; fileRef = E7651E487A7BF253D90B6CFFD331BB35 /* mach.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		47D1080217B6E77219509C279E8FCFBE /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAE2108E23F447F875C87858DF50F88 /* Indicator.swift */; };
+		4B785059C971D3B43921E583F6CAC553 /* posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CFB979DC699BA8BF45BB2ACC8E6EFD4 /* posix.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5269D9CB627314B3552DFA93B33F2223 /* ThreadMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28086C14163665164606840F287BABC8 /* ThreadMonitor.swift */; };
+		543A8A370DCC140B7211443399FFB7C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		575F64DD76BBDE6858223D46BB52F123 /* back_trace.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEF60486155E76DD5270D74394462C0 /* back_trace.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5FA526557719FDBE81B1974B113CF600 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 593C23BE6F81900B7E5D14655827CBEC /* SwiftyJSON-dummy.m */; };
-		675101BBD0D1B71FD179570BF1B13E8F /* context_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 4862F45A6F127D7DF4C72DC9047ED6A0 /* context_helper.c */; };
-		6E9E9E4D13B14AEEF3B9EA0915B12CD0 /* lock_checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F1E6AD5121F559278F7175722602936 /* lock_checker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6EFAC310D8C4CDA226521C2821EEB162 /* SNKThreadMonitor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B26E5AFAB62910757229D575EE150609 /* SNKThreadMonitor-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7355F3DAB300811AD0B8D67C045B4185 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D246C952FA6093097882DB1707107776 /* Lock.swift */; };
-		73E1DA9AB34CAC9AF5EB03E2086A55CD /* lock_checker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D451CCE56764301AFC8DEF1C85FA02E /* lock_checker.m */; };
-		7AB4992C4015440AC8F2ADE7FB9A6094 /* MachThread+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49E31393ED923BA6640E49BAE41AA /* MachThread+Utils.swift */; };
-		7D243D6824534DBF93FE41F164A72D43 /* lock_indicator.c in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9F9D25FF4CB9D312200E8C1EAE2C /* lock_indicator.c */; };
-		87E56647EF5400074703AC5868C76699 /* POSIXThread+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D19DED3647EBB40D6610836457BD57 /* POSIXThread+Utils.swift */; };
+		73AFDD56A10A878B828C509BFDFF6380 /* time_value_t+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12665549E65CB7E8AC360D367B2F19 /* time_value_t+Codable.swift */; };
+		73F81FB87560BD1F20AB19D51A3C1344 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2CDA94AF4652BBBF3194599A3CF42 /* Consts.swift */; };
+		746268C5E10A97A5CE9250848E806094 /* MachExtendedInfo+Desc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013CFD87A762140A108507A93BA7DABB /* MachExtendedInfo+Desc.swift */; };
+		74FE27872049716927E0807DF4A5BBFF /* lock_checker.m in Sources */ = {isa = PBXBuildFile; fileRef = A76057EDEB47911CF0803E6FB4664A4D /* lock_checker.m */; };
+		838CDF57294957DF7E3FA972938FEF59 /* SNKBackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 0645458DBAA5364C2FE509CC0F967EF8 /* SNKBackTrace.m */; };
+		9485D11672C2BBC9F3708C6F8428E69A /* context_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B9E2C7D707DBC5DA14C307E2C91E62B9 /* context_helper.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		95ADF7DE755EF111D291616C817D7D9F /* MachThread+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F94BB389E7A343778C5FB5F18F39D9 /* MachThread+Utils.swift */; };
+		980A928963C815C8C831A6A2358EFD18 /* MachIdentifierInfo+Desc.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED58ED36F4851BBDBDCD911FEE922ED9 /* MachIdentifierInfo+Desc.swift */; };
 		A115142039C23F91827E6961CC479F05 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A02287654566C4E833D550868E61137D /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A250C9796F9A9582F235B414F8735C7E /* posix.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CF353DBAE02831A7839770266547B1 /* posix.m */; };
 		A3CEE8324948497036C4E123B21CBC59 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D7ABD2F10BB23F044CCCAEFA96E16 /* SwiftyJSON.swift */; };
-		B733BFA4744779971DB54E586E1900D8 /* mach.h in Headers */ = {isa = PBXBuildFile; fileRef = C2468FBF1D653E42143A0C2A1B3FB308 /* mach.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B9573E9E76D3EED7AAA93D96121CEE4C /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA0875B265AA3EE5049DCC980C40F9A /* Indicator.swift */; };
-		BF9BCE65123E9BB63656E7BA4836AC2E /* context_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9362FE52B0D05C49C0C811386820F45F /* context_helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C897A6C0CA6DEBF2BEA6416FCA5D8A76 /* posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF55821C64AE9F89CD1B80652C96FD5 /* posix.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D9F96F9366B53761E5B08B7B05FD505E /* ThreadMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55F80BC039ADB85A2E05E4158806A09 /* ThreadMonitor.swift */; };
+		A90C88566C68B6D75DA7A2D164F52E04 /* SNKThreadMonitor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8392D15DB6C3C97A03626011BF19FE /* SNKThreadMonitor-dummy.m */; };
+		AEF821CE56C0387D0A8FB8ED6DC643C2 /* Internal_Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77DB7C2FFCDCFFA76C825544C20CA0 /* Internal_Consts.swift */; };
+		BB3F741875738A83D5210356EF564542 /* MachBasicInfo+Desc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F209AF9B874B7B96FA181298883D9 /* MachBasicInfo+Desc.swift */; };
+		CA43868992A2D5EC5DA94D570A30CA87 /* ThreadInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42867C6A1B722C8D8F6A2F8442CC44A6 /* ThreadInfo.swift */; };
+		CA96F65A3EED87EC56014A43F3222549 /* context_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 39E2AF0679A13A24BF8C276704FC598B /* context_helper.c */; };
 		DA53DE55509AF364ABD5BE1D9B0F0E8D /* Pods-SNKThreadMonitor_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A1127FFFA516B315856D40BFBC4D414 /* Pods-SNKThreadMonitor_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA99C47D4440B727C343069042E0FAB4 /* SNKThreadMonitor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8392D15DB6C3C97A03626011BF19FE /* SNKThreadMonitor-dummy.m */; };
+		DC2B23D0772EB9660CF06596BD1F5D55 /* SNKThreadMonitor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B26E5AFAB62910757229D575EE150609 /* SNKThreadMonitor-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD0E4D87E38D44527A86A9944B44203E /* Pods-SNKThreadMonitor_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4579F61B5519E31ED44064BB07DA65A /* Pods-SNKThreadMonitor_Tests-dummy.m */; };
 		DEA09B208855973F68C43C284EF11CB3 /* Pods-SNKThreadMonitor_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E1D8B7EABB9FEDD40CC5770CA73D469B /* Pods-SNKThreadMonitor_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E0E90D7B6E8475E256964EAE94FD7501 /* back_trace.h in Headers */ = {isa = PBXBuildFile; fileRef = 63784B0B96B4375B36AED839CBB5C9BA /* back_trace.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA32A9EA67E20EAAE5AFCF548CBABE14 /* ThreadInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69968519FECDDA3FF11FC45DA6792D96 /* ThreadInfo.swift */; };
-		F5164BF40931D274597283539E167115 /* SNKBackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5CD84382E65FE69A3A14501E9AF35C /* SNKBackTrace.m */; };
+		E12F9FC7A2017114BC8645F12BF433AA /* ThreadMonitor+POSIX.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED2AD2975D797C51A241D9E1E3C38FC /* ThreadMonitor+POSIX.swift */; };
+		E8B476C77A7DC9E810A5A09557A335D8 /* SNKBackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = A36799B9F6D53E4EC7666C34F9B4E896 /* SNKBackTrace.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EDE0ED38C7AC00E276BA36AA2824766B /* mach.c in Sources */ = {isa = PBXBuildFile; fileRef = E084EAF044A335D301C126951B092562 /* mach.c */; };
+		EE5900C21CD2D40877A4A870E7CC124B /* back_trace.c in Sources */ = {isa = PBXBuildFile; fileRef = 46A902B4F7C7478F5AEBB093EC43A42E /* back_trace.c */; };
+		EF0A80331EE0F07D5B1544BFD666348E /* posix.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0B85F63ACA5E85D7B4D3AE800C92B7 /* posix.m */; };
+		F2498F7DC93126A875C4E2F4DE2F7CD3 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A8B4399FB2D52B046E387D86BD09A5 /* Error.swift */; };
+		FDEC988F349A527980969C2AEB050E52 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC303F6A63C87930E6533F12A2A7AB38 /* Lock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		50E72F4E37DCC7F08449CD9076EB56C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
-			remoteInfo = SwiftyJSON;
-		};
-		92863027E6CC59701E6BAFA3F3F87273 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 144ED2C20B27CC0960DA7C68F8EDBB23;
-			remoteInfo = "Pods-SNKThreadMonitor_Example";
-		};
-		9FFCD0A144177A92DEEDD6E0820D3A85 /* PBXContainerItemProxy */ = {
+		041D8B2E08DE14C1400716A8BCF0EB39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BF4F82A9B960C149E2235BE982871704;
 			remoteInfo = SNKThreadMonitor;
 		};
+		3853EA867353596703AE25845ADDFB87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 144ED2C20B27CC0960DA7C68F8EDBB23;
+			remoteInfo = "Pods-SNKThreadMonitor_Example";
+		};
+		DBFF00DD765A877E22552207F4F7CBC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
+			remoteInfo = SwiftyJSON;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06CF353DBAE02831A7839770266547B1 /* posix.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = posix.m; sourceTree = "<group>"; };
+		013CFD87A762140A108507A93BA7DABB /* MachExtendedInfo+Desc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "MachExtendedInfo+Desc.swift"; sourceTree = "<group>"; };
+		0645458DBAA5364C2FE509CC0F967EF8 /* SNKBackTrace.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SNKBackTrace.m; sourceTree = "<group>"; };
 		095B6498526CF892D0CEAEDDF04DCBC6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		0A7F949362A309036783FDE86B756D61 /* mach.c */ = {isa = PBXFileReference; includeInIndex = 1; path = mach.c; sourceTree = "<group>"; };
 		0B2DA391EA2236FA59928D7D610317A5 /* Pods-SNKThreadMonitor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNKThreadMonitor_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		0D6F14A33B5C8EAB044493A4CBADAE1D /* Pods-SNKThreadMonitor_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SNKThreadMonitor_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		16EA837B18B2A146139C35FD9365F0C8 /* Pods-SNKThreadMonitor_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNKThreadMonitor_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		1A1127FFFA516B315856D40BFBC4D414 /* Pods-SNKThreadMonitor_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNKThreadMonitor_Example-umbrella.h"; sourceTree = "<group>"; };
-		1AE2050C3A227701184FFE6652EFD123 /* Consts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		1CFB979DC699BA8BF45BB2ACC8E6EFD4 /* posix.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = posix.h; sourceTree = "<group>"; };
+		1DAE2108E23F447F875C87858DF50F88 /* Indicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		21EB4E86202C85EB402CFF57C7B47A40 /* SNKThreadMonitor.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SNKThreadMonitor.modulemap; sourceTree = "<group>"; };
 		226E443EAD10F24939DD3143383C0C87 /* Pods-SNKThreadMonitor_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNKThreadMonitor_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		234592FCD4D83B3A76B8E1BC55442E08 /* Pods-SNKThreadMonitor_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SNKThreadMonitor_Tests"; path = Pods_SNKThreadMonitor_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23C7AC1DBCDB81B622C7BF40C1AD10D8 /* POSIXThread+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "POSIXThread+Utils.swift"; sourceTree = "<group>"; };
+		258F209AF9B874B7B96FA181298883D9 /* MachBasicInfo+Desc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "MachBasicInfo+Desc.swift"; sourceTree = "<group>"; };
+		28086C14163665164606840F287BABC8 /* ThreadMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ThreadMonitor.swift; sourceTree = "<group>"; };
 		2AF36C21A38030E03B9B7D54198B1A47 /* SNKThreadMonitor.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SNKThreadMonitor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		2EF96522845B313816FEC531AD50542C /* SNKBackTrace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SNKBackTrace.h; sourceTree = "<group>"; };
 		3344D828F5AB8878F09A6F57BF22D05B /* Pods-SNKThreadMonitor_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNKThreadMonitor_Example.release.xcconfig"; sourceTree = "<group>"; };
-		3E5CD84382E65FE69A3A14501E9AF35C /* SNKBackTrace.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SNKBackTrace.m; sourceTree = "<group>"; };
-		3F1E6AD5121F559278F7175722602936 /* lock_checker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = lock_checker.h; sourceTree = "<group>"; };
+		34B1E8DC473E4D268FE29C8D5625911B /* ThreadMonitor+Mach.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ThreadMonitor+Mach.swift"; sourceTree = "<group>"; };
+		39E2AF0679A13A24BF8C276704FC598B /* context_helper.c */ = {isa = PBXFileReference; includeInIndex = 1; path = context_helper.c; sourceTree = "<group>"; };
 		412C8DA1C066031CB93C66D89A43814D /* Pods-SNKThreadMonitor_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SNKThreadMonitor_Example-dummy.m"; sourceTree = "<group>"; };
-		4862F45A6F127D7DF4C72DC9047ED6A0 /* context_helper.c */ = {isa = PBXFileReference; includeInIndex = 1; path = context_helper.c; sourceTree = "<group>"; };
+		42867C6A1B722C8D8F6A2F8442CC44A6 /* ThreadInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ThreadInfo.swift; sourceTree = "<group>"; };
+		46A902B4F7C7478F5AEBB093EC43A42E /* back_trace.c */ = {isa = PBXFileReference; includeInIndex = 1; path = back_trace.c; sourceTree = "<group>"; };
+		4F54AF0C69D3EF7336DC3B441F1B5243 /* lock_indicator.c */ = {isa = PBXFileReference; includeInIndex = 1; path = lock_indicator.c; sourceTree = "<group>"; };
 		505D6A1CE2CD58E13D3ED67C676D7A85 /* Pods-SNKThreadMonitor_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNKThreadMonitor_Example-Info.plist"; sourceTree = "<group>"; };
 		53C1A7E15161AE3A0E3A5090E19F84AE /* SwiftyJSON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.release.xcconfig; sourceTree = "<group>"; };
 		56CF66FD15E7CC78F231EC7B9B4A0B8F /* SNKThreadMonitor-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SNKThreadMonitor-Info.plist"; sourceTree = "<group>"; };
-		57D19DED3647EBB40D6610836457BD57 /* POSIXThread+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "POSIXThread+Utils.swift"; sourceTree = "<group>"; };
 		593C23BE6F81900B7E5D14655827CBEC /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
 		60A5446E3184AC9044FD67AD5C6955CF /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
 		620F40F12F69D98F32F45C467FC108B0 /* Pods-SNKThreadMonitor_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNKThreadMonitor_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		63784B0B96B4375B36AED839CBB5C9BA /* back_trace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = back_trace.h; sourceTree = "<group>"; };
-		64EFED95DF2BA8093859DB8E9C0C46CE /* ThreadMonitor+Notify.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ThreadMonitor+Notify.swift"; sourceTree = "<group>"; };
-		69968519FECDDA3FF11FC45DA6792D96 /* ThreadInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ThreadInfo.swift; sourceTree = "<group>"; };
+		69B3A1097D30069AA4A0AB85F21BEF7B /* ThreadMonitor+Notify.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ThreadMonitor+Notify.swift"; sourceTree = "<group>"; };
 		6A354C76B80E89FBF808D97B0B17C43C /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		6C0520B029E5252E6600899CD256DFCE /* ThreadMonitor+POSIX.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ThreadMonitor+POSIX.swift"; sourceTree = "<group>"; };
 		6D38C0824D3A9EAEA328F19D59E489D7 /* SNKThreadMonitor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNKThreadMonitor.release.xcconfig; sourceTree = "<group>"; };
-		6D451CCE56764301AFC8DEF1C85FA02E /* lock_checker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = lock_checker.m; sourceTree = "<group>"; };
 		6E5A17D7D4F6A2CD8917902A389608D9 /* Pods-SNKThreadMonitor_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SNKThreadMonitor_Example-frameworks.sh"; sourceTree = "<group>"; };
-		6FF55821C64AE9F89CD1B80652C96FD5 /* posix.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = posix.h; sourceTree = "<group>"; };
+		6FEF60486155E76DD5270D74394462C0 /* back_trace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = back_trace.h; sourceTree = "<group>"; };
 		70C8C463C60CFBF6F9983CF2D142D822 /* Pods-SNKThreadMonitor_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNKThreadMonitor_Tests-Info.plist"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		74F94BB389E7A343778C5FB5F18F39D9 /* MachThread+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "MachThread+Utils.swift"; sourceTree = "<group>"; };
 		78D419E2D967549ED301578180BA3CA1 /* SNKThreadMonitor-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNKThreadMonitor-prefix.pch"; sourceTree = "<group>"; };
+		793E77BB5BA3B3F138C46BA7CF5125AB /* lock_indicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = lock_indicator.h; sourceTree = "<group>"; };
 		874D7ABD2F10BB23F044CCCAEFA96E16 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		87B39CCE7C51DA204E328090A21ACE19 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		8DA0875B265AA3EE5049DCC980C40F9A /* Indicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
-		90C49E31393ED923BA6640E49BAE41AA /* MachThread+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "MachThread+Utils.swift"; sourceTree = "<group>"; };
-		91326047E3DF9971E04E8FC57CC3D2E1 /* lock_indicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = lock_indicator.h; sourceTree = "<group>"; };
-		9362FE52B0D05C49C0C811386820F45F /* context_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = context_helper.h; sourceTree = "<group>"; };
+		8C77DB7C2FFCDCFFA76C825544C20CA0 /* Internal_Consts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Internal_Consts.swift; sourceTree = "<group>"; };
 		9A8392D15DB6C3C97A03626011BF19FE /* SNKThreadMonitor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SNKThreadMonitor-dummy.m"; sourceTree = "<group>"; };
 		9B4438984DDECF03DBDCD146B6CFE0F9 /* Pods-SNKThreadMonitor_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SNKThreadMonitor_Tests.modulemap"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A02287654566C4E833D550868E61137D /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		A0E2CDA94AF4652BBBF3194599A3CF42 /* Consts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		A36799B9F6D53E4EC7666C34F9B4E896 /* SNKBackTrace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SNKBackTrace.h; sourceTree = "<group>"; };
 		A4D7DC4F329A1DECDE71DA64BAEBB226 /* Pods-SNKThreadMonitor_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNKThreadMonitor_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		AB6B3F0A1EAD95C324F839383B1EA6C4 /* ThreadMonitor+Mach.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ThreadMonitor+Mach.swift"; sourceTree = "<group>"; };
+		A76057EDEB47911CF0803E6FB4664A4D /* lock_checker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = lock_checker.m; sourceTree = "<group>"; };
 		ABB2280C137D04C2F2DD2528EC003378 /* Pods-SNKThreadMonitor_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SNKThreadMonitor_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		AFC7771842C94990D1D55C389B99D592 /* SNKThreadMonitor */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SNKThreadMonitor; path = SNKThreadMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B26E5AFAB62910757229D575EE150609 /* SNKThreadMonitor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNKThreadMonitor-umbrella.h"; sourceTree = "<group>"; };
-		BB5E9F9D25FF4CB9D312200E8C1EAE2C /* lock_indicator.c */ = {isa = PBXFileReference; includeInIndex = 1; path = lock_indicator.c; sourceTree = "<group>"; };
-		C2468FBF1D653E42143A0C2A1B3FB308 /* mach.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = mach.h; sourceTree = "<group>"; };
+		B9E2C7D707DBC5DA14C307E2C91E62B9 /* context_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = context_helper.h; sourceTree = "<group>"; };
+		BED2AD2975D797C51A241D9E1E3C38FC /* ThreadMonitor+POSIX.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ThreadMonitor+POSIX.swift"; sourceTree = "<group>"; };
 		C4579F61B5519E31ED44064BB07DA65A /* Pods-SNKThreadMonitor_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SNKThreadMonitor_Tests-dummy.m"; sourceTree = "<group>"; };
 		C77B2E666B6943E06195C90DF7E796A7 /* Pods-SNKThreadMonitor_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SNKThreadMonitor_Example"; path = Pods_SNKThreadMonitor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D246C952FA6093097882DB1707107776 /* Lock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
-		D2B569C0C55F75AEB9C27A96942DAF44 /* back_trace.c */ = {isa = PBXFileReference; includeInIndex = 1; path = back_trace.c; sourceTree = "<group>"; };
-		DE21AADE049AA2700678B6A6489384EC /* Internal_Consts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Internal_Consts.swift; sourceTree = "<group>"; };
+		C8A8B4399FB2D52B046E387D86BD09A5 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		DC12665549E65CB7E8AC360D367B2F19 /* time_value_t+Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "time_value_t+Codable.swift"; sourceTree = "<group>"; };
+		DDBF31FA2329E9BB8064BC4487946F15 /* lock_checker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = lock_checker.h; sourceTree = "<group>"; };
+		E084EAF044A335D301C126951B092562 /* mach.c */ = {isa = PBXFileReference; includeInIndex = 1; path = mach.c; sourceTree = "<group>"; };
 		E1D8B7EABB9FEDD40CC5770CA73D469B /* Pods-SNKThreadMonitor_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNKThreadMonitor_Tests-umbrella.h"; sourceTree = "<group>"; };
 		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A0FD389D173F56FBDB8A357093095A /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
-		E55F80BC039ADB85A2E05E4158806A09 /* ThreadMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ThreadMonitor.swift; sourceTree = "<group>"; };
+		E7651E487A7BF253D90B6CFFD331BB35 /* mach.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = mach.h; sourceTree = "<group>"; };
+		ED58ED36F4851BBDBDCD911FEE922ED9 /* MachIdentifierInfo+Desc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "MachIdentifierInfo+Desc.swift"; sourceTree = "<group>"; };
 		F1F9869DCB489B5433FDEFBE7DA1A7F2 /* SNKThreadMonitor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNKThreadMonitor.debug.xcconfig; sourceTree = "<group>"; };
 		F8D55E3BEC2588689D54AFF1AE0AC1DF /* SwiftyJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.debug.xcconfig; sourceTree = "<group>"; };
+		FA0B85F63ACA5E85D7B4D3AE800C92B7 /* posix.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = posix.m; sourceTree = "<group>"; };
+		FC303F6A63C87930E6533F12A2A7AB38 /* Lock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		FD8CE640B44ABBE332900DCE8C901FAD /* Pods-SNKThreadMonitor_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SNKThreadMonitor_Example.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,11 +167,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7C50213958E59254C3619F26ACD52F21 /* Frameworks */ = {
+		BA442105B70E97E89FB811D9BA71BC46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B6A87E1307234D450EBB00C40EAD4C /* Foundation.framework in Frameworks */,
+				543A8A370DCC140B7211443399FFB7C9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,15 +197,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		16658DD6D0FC9DA31A406888DE95BDC7 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				CA471B1AF97DD7479D8A84023EC6636C /* export */,
-				FF22A3749A7A1231753556720E432439 /* internal */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
 		17E62C573B6CCD2876E73A518B67AB82 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,30 +212,30 @@
 			path = "Example/Pods/Target Support Files/SNKThreadMonitor";
 			sourceTree = "<group>";
 		};
-		19C299B22E2B0043A1AFB1EC46E99E91 /* utils */ = {
+		20C748C99742BC5BB2D5C77ADC6C7E3A /* internal */ = {
 			isa = PBXGroup;
 			children = (
-				D2B569C0C55F75AEB9C27A96942DAF44 /* back_trace.c */,
-				63784B0B96B4375B36AED839CBB5C9BA /* back_trace.h */,
-				4862F45A6F127D7DF4C72DC9047ED6A0 /* context_helper.c */,
-				9362FE52B0D05C49C0C811386820F45F /* context_helper.h */,
-				DE21AADE049AA2700678B6A6489384EC /* Internal_Consts.swift */,
-				D246C952FA6093097882DB1707107776 /* Lock.swift */,
-				3F1E6AD5121F559278F7175722602936 /* lock_checker.h */,
-				6D451CCE56764301AFC8DEF1C85FA02E /* lock_checker.m */,
-				BB5E9F9D25FF4CB9D312200E8C1EAE2C /* lock_indicator.c */,
-				91326047E3DF9971E04E8FC57CC3D2E1 /* lock_indicator.h */,
-				0A7F949362A309036783FDE86B756D61 /* mach.c */,
-				C2468FBF1D653E42143A0C2A1B3FB308 /* mach.h */,
-				90C49E31393ED923BA6640E49BAE41AA /* MachThread+Utils.swift */,
-				6FF55821C64AE9F89CD1B80652C96FD5 /* posix.h */,
-				06CF353DBAE02831A7839770266547B1 /* posix.m */,
-				57D19DED3647EBB40D6610836457BD57 /* POSIXThread+Utils.swift */,
-				2EF96522845B313816FEC531AD50542C /* SNKBackTrace.h */,
-				3E5CD84382E65FE69A3A14501E9AF35C /* SNKBackTrace.m */,
+				34B1E8DC473E4D268FE29C8D5625911B /* ThreadMonitor+Mach.swift */,
+				69B3A1097D30069AA4A0AB85F21BEF7B /* ThreadMonitor+Notify.swift */,
+				BED2AD2975D797C51A241D9E1E3C38FC /* ThreadMonitor+POSIX.swift */,
+				685D89DCB2E61CD31E85C81386B3CDFD /* utils */,
 			);
-			name = utils;
-			path = utils;
+			name = internal;
+			path = SNKThreadMonitor/Classes/Core/internal;
+			sourceTree = "<group>";
+		};
+		2B07027165688D8EB8550F0E9051B02F /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				258F209AF9B874B7B96FA181298883D9 /* MachBasicInfo+Desc.swift */,
+				013CFD87A762140A108507A93BA7DABB /* MachExtendedInfo+Desc.swift */,
+				ED58ED36F4851BBDBDCD911FEE922ED9 /* MachIdentifierInfo+Desc.swift */,
+				74F94BB389E7A343778C5FB5F18F39D9 /* MachThread+Utils.swift */,
+				23C7AC1DBCDB81B622C7BF40C1AD10D8 /* POSIXThread+Utils.swift */,
+				DC12665549E65CB7E8AC360D367B2F19 /* time_value_t+Codable.swift */,
+			);
+			name = extensions;
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		2C6A71D462ED46C2A7F74D962134DC74 /* Pods */ = {
@@ -243,6 +244,27 @@
 				519BE3CB838B11312A08D7AC7819F70F /* SwiftyJSON */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		2C97109E7CD49405679E33F79BD30F99 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				93D5F9C0369B68688AACCABD13BE4BA4 /* export */,
+				20C748C99742BC5BB2D5C77ADC6C7E3A /* internal */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		35DB7AF62F11548CC439C7AA65431E6C /* lock */ = {
+			isa = PBXGroup;
+			children = (
+				DDBF31FA2329E9BB8064BC4487946F15 /* lock_checker.h */,
+				A76057EDEB47911CF0803E6FB4664A4D /* lock_checker.m */,
+				4F54AF0C69D3EF7336DC3B441F1B5243 /* lock_indicator.c */,
+				793E77BB5BA3B3F138C46BA7CF5125AB /* lock_indicator.h */,
+			);
+			name = lock;
+			path = lock;
 			sourceTree = "<group>";
 		};
 		519BE3CB838B11312A08D7AC7819F70F /* SwiftyJSON */ = {
@@ -280,15 +302,44 @@
 			path = "Target Support Files/Pods-SNKThreadMonitor_Example";
 			sourceTree = "<group>";
 		};
+		685D89DCB2E61CD31E85C81386B3CDFD /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				E084EAF044A335D301C126951B092562 /* mach.c */,
+				E7651E487A7BF253D90B6CFFD331BB35 /* mach.h */,
+				1CFB979DC699BA8BF45BB2ACC8E6EFD4 /* posix.h */,
+				FA0B85F63ACA5E85D7B4D3AE800C92B7 /* posix.m */,
+				E15415ECB366243EA261D90F9B77DF6D /* backtrace */,
+				35DB7AF62F11548CC439C7AA65431E6C /* lock */,
+				D3B7A902E6E41090AEEC28D6CE792214 /* others */,
+			);
+			name = utils;
+			path = utils;
+			sourceTree = "<group>";
+		};
 		937687824D38D7005C53717854D425F2 /* SNKThreadMonitor */ = {
 			isa = PBXGroup;
 			children = (
-				16658DD6D0FC9DA31A406888DE95BDC7 /* Core */,
+				2C97109E7CD49405679E33F79BD30F99 /* Core */,
 				D876E5EBFCB88E59FCF4743C4A308766 /* Pod */,
 				17E62C573B6CCD2876E73A518B67AB82 /* Support Files */,
 			);
 			name = SNKThreadMonitor;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		93D5F9C0369B68688AACCABD13BE4BA4 /* export */ = {
+			isa = PBXGroup;
+			children = (
+				A0E2CDA94AF4652BBBF3194599A3CF42 /* Consts.swift */,
+				C8A8B4399FB2D52B046E387D86BD09A5 /* Error.swift */,
+				1DAE2108E23F447F875C87858DF50F88 /* Indicator.swift */,
+				42867C6A1B722C8D8F6A2F8442CC44A6 /* ThreadInfo.swift */,
+				28086C14163665164606840F287BABC8 /* ThreadMonitor.swift */,
+				2B07027165688D8EB8550F0E9051B02F /* extensions */,
+			);
+			name = export;
+			path = SNKThreadMonitor/Classes/Core/export;
 			sourceTree = "<group>";
 		};
 		C90D144F9F966C3A6F8D0F013B9D6599 /* Pods-SNKThreadMonitor_Tests */ = {
@@ -316,18 +367,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		CA471B1AF97DD7479D8A84023EC6636C /* export */ = {
-			isa = PBXGroup;
-			children = (
-				1AE2050C3A227701184FFE6652EFD123 /* Consts.swift */,
-				8DA0875B265AA3EE5049DCC980C40F9A /* Indicator.swift */,
-				69968519FECDDA3FF11FC45DA6792D96 /* ThreadInfo.swift */,
-				E55F80BC039ADB85A2E05E4158806A09 /* ThreadMonitor.swift */,
-			);
-			name = export;
-			path = SNKThreadMonitor/Classes/export;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +387,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D3B7A902E6E41090AEEC28D6CE792214 /* others */ = {
+			isa = PBXGroup;
+			children = (
+				8C77DB7C2FFCDCFFA76C825544C20CA0 /* Internal_Consts.swift */,
+				FC303F6A63C87930E6533F12A2A7AB38 /* Lock.swift */,
+			);
+			name = others;
+			path = others;
+			sourceTree = "<group>";
+		};
 		D876E5EBFCB88E59FCF4743C4A308766 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +405,20 @@
 				2AF36C21A38030E03B9B7D54198B1A47 /* SNKThreadMonitor.podspec */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		E15415ECB366243EA261D90F9B77DF6D /* backtrace */ = {
+			isa = PBXGroup;
+			children = (
+				46A902B4F7C7478F5AEBB093EC43A42E /* back_trace.c */,
+				6FEF60486155E76DD5270D74394462C0 /* back_trace.h */,
+				39E2AF0679A13A24BF8C276704FC598B /* context_helper.c */,
+				B9E2C7D707DBC5DA14C307E2C91E62B9 /* context_helper.h */,
+				A36799B9F6D53E4EC7666C34F9B4E896 /* SNKBackTrace.h */,
+				0645458DBAA5364C2FE509CC0F967EF8 /* SNKBackTrace.m */,
+			);
+			name = backtrace;
+			path = backtrace;
 			sourceTree = "<group>";
 		};
 		E7117206C2C7669CF7C06E59DE55529D /* Support Files */ = {
@@ -381,36 +444,9 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		FF22A3749A7A1231753556720E432439 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				AB6B3F0A1EAD95C324F839383B1EA6C4 /* ThreadMonitor+Mach.swift */,
-				64EFED95DF2BA8093859DB8E9C0C46CE /* ThreadMonitor+Notify.swift */,
-				6C0520B029E5252E6600899CD256DFCE /* ThreadMonitor+POSIX.swift */,
-				19C299B22E2B0043A1AFB1EC46E99E91 /* utils */,
-			);
-			name = internal;
-			path = SNKThreadMonitor/Classes/internal;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		036463E99A13CA3BFC1DE77101E3FD00 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E0E90D7B6E8475E256964EAE94FD7501 /* back_trace.h in Headers */,
-				BF9BCE65123E9BB63656E7BA4836AC2E /* context_helper.h in Headers */,
-				6E9E9E4D13B14AEEF3B9EA0915B12CD0 /* lock_checker.h in Headers */,
-				2E9ED09B7F79993398856E84AAA9E260 /* lock_indicator.h in Headers */,
-				B733BFA4744779971DB54E586E1900D8 /* mach.h in Headers */,
-				C897A6C0CA6DEBF2BEA6416FCA5D8A76 /* posix.h in Headers */,
-				4EF21C9FE7C174B9BC4E4E083E1FD2BB /* SNKBackTrace.h in Headers */,
-				6EFAC310D8C4CDA226521C2821EEB162 /* SNKThreadMonitor-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		41145698F7DF35B05606D01197454CFC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -424,6 +460,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEA09B208855973F68C43C284EF11CB3 /* Pods-SNKThreadMonitor_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0FB30EE4B73706CF815699972590E81 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				575F64DD76BBDE6858223D46BB52F123 /* back_trace.h in Headers */,
+				9485D11672C2BBC9F3708C6F8428E69A /* context_helper.h in Headers */,
+				1F1D6DD21CBE1735AA0C26431AF96F23 /* lock_checker.h in Headers */,
+				24CBEF5C0839B1CC4C1A1226B0E0D7AB /* lock_indicator.h in Headers */,
+				44FC61A5B1CC1CB902D2A03FF5B5E31F /* mach.h in Headers */,
+				4B785059C971D3B43921E583F6CAC553 /* posix.h in Headers */,
+				E8B476C77A7DC9E810A5A09557A335D8 /* SNKBackTrace.h in Headers */,
+				DC2B23D0772EB9660CF06596BD1F5D55 /* SNKThreadMonitor-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,8 +501,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E0AB86AF6848106E3191A3EA514B12C4 /* PBXTargetDependency */,
-				0A59A22A4F3FF5132E359E08FA96A097 /* PBXTargetDependency */,
+				4CA3E9C53A54FB95DA636C4E52F10E5B /* PBXTargetDependency */,
+				68C80748635DEECE3EEDC49E1AB90B50 /* PBXTargetDependency */,
 			);
 			name = "Pods-SNKThreadMonitor_Example";
 			productName = Pods_SNKThreadMonitor_Example;
@@ -470,7 +521,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				052FE33317A3F04F75EFF969B816B7FD /* PBXTargetDependency */,
+				1D2B75315E6C8C450B0C12599E539F4F /* PBXTargetDependency */,
 			);
 			name = "Pods-SNKThreadMonitor_Tests";
 			productName = Pods_SNKThreadMonitor_Tests;
@@ -479,12 +530,12 @@
 		};
 		BF4F82A9B960C149E2235BE982871704 /* SNKThreadMonitor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 367F483EDC6732CE093A38590BBF8C73 /* Build configuration list for PBXNativeTarget "SNKThreadMonitor" */;
+			buildConfigurationList = 143B740138550ED7F98527BA5F1A4085 /* Build configuration list for PBXNativeTarget "SNKThreadMonitor" */;
 			buildPhases = (
-				036463E99A13CA3BFC1DE77101E3FD00 /* Headers */,
-				00BECC85BEE819776DF9E8FC41030FEB /* Sources */,
-				7C50213958E59254C3619F26ACD52F21 /* Frameworks */,
-				EA9BE90BA263E707D9EEE8D5D67B5BAF /* Resources */,
+				E0FB30EE4B73706CF815699972590E81 /* Headers */,
+				B1B7219EB10E5F84BA01B197BC238D91 /* Sources */,
+				BA442105B70E97E89FB811D9BA71BC46 /* Frameworks */,
+				8D7A77116F068503287C06DE134920E8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -519,8 +570,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -551,6 +602,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8D7A77116F068503287C06DE134920E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B05597C458D738E12F170EAC515F8483 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -565,42 +623,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EA9BE90BA263E707D9EEE8D5D67B5BAF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00BECC85BEE819776DF9E8FC41030FEB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1DE52BE89F7F7A61B7B740899E774E89 /* back_trace.c in Sources */,
-				25B157E1546C8A20C0C328689FD571DB /* Consts.swift in Sources */,
-				675101BBD0D1B71FD179570BF1B13E8F /* context_helper.c in Sources */,
-				B9573E9E76D3EED7AAA93D96121CEE4C /* Indicator.swift in Sources */,
-				190E28B40A4B2914B373E804B4BE9C5B /* Internal_Consts.swift in Sources */,
-				7355F3DAB300811AD0B8D67C045B4185 /* Lock.swift in Sources */,
-				73E1DA9AB34CAC9AF5EB03E2086A55CD /* lock_checker.m in Sources */,
-				7D243D6824534DBF93FE41F164A72D43 /* lock_indicator.c in Sources */,
-				024D5ED6B6D60F3C6D1775C510225C76 /* mach.c in Sources */,
-				7AB4992C4015440AC8F2ADE7FB9A6094 /* MachThread+Utils.swift in Sources */,
-				A250C9796F9A9582F235B414F8735C7E /* posix.m in Sources */,
-				87E56647EF5400074703AC5868C76699 /* POSIXThread+Utils.swift in Sources */,
-				F5164BF40931D274597283539E167115 /* SNKBackTrace.m in Sources */,
-				DA99C47D4440B727C343069042E0FAB4 /* SNKThreadMonitor-dummy.m in Sources */,
-				EA32A9EA67E20EAAE5AFCF548CBABE14 /* ThreadInfo.swift in Sources */,
-				D9F96F9366B53761E5B08B7B05FD505E /* ThreadMonitor.swift in Sources */,
-				338643C9C1725123FB690D93697A2717 /* ThreadMonitor+Mach.swift in Sources */,
-				37F6320413316836E736AC13F3F0D5CF /* ThreadMonitor+Notify.swift in Sources */,
-				07E674642EB9E1CA7C8F4AA1DD965727 /* ThreadMonitor+POSIX.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		113E7E74DA557E9529A15AA0D19B0F91 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -626,63 +651,61 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1B7219EB10E5F84BA01B197BC238D91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE5900C21CD2D40877A4A870E7CC124B /* back_trace.c in Sources */,
+				73F81FB87560BD1F20AB19D51A3C1344 /* Consts.swift in Sources */,
+				CA96F65A3EED87EC56014A43F3222549 /* context_helper.c in Sources */,
+				F2498F7DC93126A875C4E2F4DE2F7CD3 /* Error.swift in Sources */,
+				47D1080217B6E77219509C279E8FCFBE /* Indicator.swift in Sources */,
+				AEF821CE56C0387D0A8FB8ED6DC643C2 /* Internal_Consts.swift in Sources */,
+				FDEC988F349A527980969C2AEB050E52 /* Lock.swift in Sources */,
+				74FE27872049716927E0807DF4A5BBFF /* lock_checker.m in Sources */,
+				40DFE9DE682EF449AB19A9DDA9F61B57 /* lock_indicator.c in Sources */,
+				EDE0ED38C7AC00E276BA36AA2824766B /* mach.c in Sources */,
+				BB3F741875738A83D5210356EF564542 /* MachBasicInfo+Desc.swift in Sources */,
+				746268C5E10A97A5CE9250848E806094 /* MachExtendedInfo+Desc.swift in Sources */,
+				980A928963C815C8C831A6A2358EFD18 /* MachIdentifierInfo+Desc.swift in Sources */,
+				95ADF7DE755EF111D291616C817D7D9F /* MachThread+Utils.swift in Sources */,
+				EF0A80331EE0F07D5B1544BFD666348E /* posix.m in Sources */,
+				0726072E7C30A5F7AC20E6BA21211FEF /* POSIXThread+Utils.swift in Sources */,
+				838CDF57294957DF7E3FA972938FEF59 /* SNKBackTrace.m in Sources */,
+				A90C88566C68B6D75DA7A2D164F52E04 /* SNKThreadMonitor-dummy.m in Sources */,
+				CA43868992A2D5EC5DA94D570A30CA87 /* ThreadInfo.swift in Sources */,
+				5269D9CB627314B3552DFA93B33F2223 /* ThreadMonitor.swift in Sources */,
+				2812BD9F750F826B1535FBE95D123984 /* ThreadMonitor+Mach.swift in Sources */,
+				3A6DBA0C9F5F3B778FB1A3FFB7E43192 /* ThreadMonitor+Notify.swift in Sources */,
+				E12F9FC7A2017114BC8645F12BF433AA /* ThreadMonitor+POSIX.swift in Sources */,
+				73AFDD56A10A878B828C509BFDFF6380 /* time_value_t+Codable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		052FE33317A3F04F75EFF969B816B7FD /* PBXTargetDependency */ = {
+		1D2B75315E6C8C450B0C12599E539F4F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-SNKThreadMonitor_Example";
 			target = 144ED2C20B27CC0960DA7C68F8EDBB23 /* Pods-SNKThreadMonitor_Example */;
-			targetProxy = 92863027E6CC59701E6BAFA3F3F87273 /* PBXContainerItemProxy */;
+			targetProxy = 3853EA867353596703AE25845ADDFB87 /* PBXContainerItemProxy */;
 		};
-		0A59A22A4F3FF5132E359E08FA96A097 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
-			targetProxy = 50E72F4E37DCC7F08449CD9076EB56C1 /* PBXContainerItemProxy */;
-		};
-		E0AB86AF6848106E3191A3EA514B12C4 /* PBXTargetDependency */ = {
+		4CA3E9C53A54FB95DA636C4E52F10E5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SNKThreadMonitor;
 			target = BF4F82A9B960C149E2235BE982871704 /* SNKThreadMonitor */;
-			targetProxy = 9FFCD0A144177A92DEEDD6E0820D3A85 /* PBXContainerItemProxy */;
+			targetProxy = 041D8B2E08DE14C1400716A8BCF0EB39 /* PBXContainerItemProxy */;
+		};
+		68C80748635DEECE3EEDC49E1AB90B50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
+			targetProxy = DBFF00DD765A877E22552207F4F7CBC1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		132C5C49834AD19D190509263B831597 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D38C0824D3A9EAEA328F19D59E489D7 /* SNKThreadMonitor.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor.modulemap";
-				PRODUCT_MODULE_NAME = SNKThreadMonitor;
-				PRODUCT_NAME = SNKThreadMonitor;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		6B042CB782A3E4AC4ABBEE0029D11EE1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 620F40F12F69D98F32F45C467FC108B0 /* Pods-SNKThreadMonitor_Tests.release.xcconfig */;
@@ -912,38 +935,6 @@
 			};
 			name = Release;
 		};
-		9D1E1B541C107185C4B7FB3A5A156630 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1F9869DCB489B5433FDEFBE7DA1A7F2 /* SNKThreadMonitor.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor.modulemap";
-				PRODUCT_MODULE_NAME = SNKThreadMonitor;
-				PRODUCT_NAME = SNKThreadMonitor;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1010,6 +1001,38 @@
 			};
 			name = Debug;
 		};
+		CC4DA9FF70A421CC37F674461932C910 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1F9869DCB489B5433FDEFBE7DA1A7F2 /* SNKThreadMonitor.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor.modulemap";
+				PRODUCT_MODULE_NAME = SNKThreadMonitor;
+				PRODUCT_NAME = SNKThreadMonitor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		D8AD7DDF753E18D1F6EE3AB5D10F4FC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0B2DA391EA2236FA59928D7D610317A5 /* Pods-SNKThreadMonitor_Example.debug.xcconfig */;
@@ -1044,9 +1067,51 @@
 			};
 			name = Debug;
 		};
+		DBAA10040C0169C99702A552BCC20BA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D38C0824D3A9EAEA328F19D59E489D7 /* SNKThreadMonitor.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SNKThreadMonitor/SNKThreadMonitor.modulemap";
+				PRODUCT_MODULE_NAME = SNKThreadMonitor;
+				PRODUCT_NAME = SNKThreadMonitor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		143B740138550ED7F98527BA5F1A4085 /* Build configuration list for PBXNativeTarget "SNKThreadMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC4DA9FF70A421CC37F674461932C910 /* Debug */,
+				DBAA10040C0169C99702A552BCC20BA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22140DB6E313723FFB3A77D139A53230 /* Build configuration list for PBXNativeTarget "Pods-SNKThreadMonitor_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1061,15 +1126,6 @@
 			buildConfigurations = (
 				7F4DC93E2ACF56201D8CDBB531D58529 /* Debug */,
 				73A724105287D1FF07EAA2B3A675A0FD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		367F483EDC6732CE093A38590BBF8C73 /* Build configuration list for PBXNativeTarget "SNKThreadMonitor" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D1E1B541C107185C4B7FB3A5A156630 /* Debug */,
-				132C5C49834AD19D190509263B831597 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

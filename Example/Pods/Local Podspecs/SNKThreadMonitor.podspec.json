@@ -1,6 +1,6 @@
 {
   "name": "SNKThreadMonitor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "summary": "A short description of SNKThreadMonitor.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://git.17zjh.com/snakeGame-iOS/snkthreadmonitor",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "git@git.17zjh.com:snakeGame-iOS/snkthreadmonitor.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "module_name": "SNKThreadMonitor",
   "platforms": {
@@ -23,8 +23,8 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "SNKThreadMonitor/Classes/**/*",
-      "public_header_files": "Pod/Classes/export/*{.h, .swift}"
+      "source_files": "SNKThreadMonitor/Classes/Core/**/*",
+      "public_header_files": "SNKThreadMonitor/Classes/Core/export/**/*"
     }
   ]
 }

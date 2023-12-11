@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SNKThreadMonitor'
-  s.version          = '0.1.1'
+  s.version          = '0.2.0'
   s.summary          = 'A short description of SNKThreadMonitor.'
 
 # This description is used to generate tags and improve search results.
@@ -31,8 +31,8 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '11.0'
   
   s.subspec 'Core' do |c|
-    c.source_files = 'SNKThreadMonitor/Classes/**/*'
-    c.public_header_files = 'Pod/Classes/export/*{.h, .swift}'
+    c.source_files = 'SNKThreadMonitor/Classes/Core/**/*'
+    c.public_header_files = 'SNKThreadMonitor/Classes/Core/export/**/*'
   end
   
   s.default_subspecs = 'Core'
