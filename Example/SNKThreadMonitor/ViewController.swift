@@ -17,8 +17,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ThreadMonitor.shared.registerDelegate(self)
-        ThreadMonitor.shared.frequency = 2
-        ThreadMonitor.shared.startMonitoring()
+        do {
+            try ThreadMonitor.shared.startMonitoring()
+        }
+        catch {
+            print(error)
+        }
         addChild(testDeadLockVC)
         view.addSubview(testDeadLockVC.view)
     }

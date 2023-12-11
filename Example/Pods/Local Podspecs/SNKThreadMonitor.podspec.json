@@ -23,8 +23,7 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "SNKThreadMonitor/Classes/Core/**/*",
-      "public_header_files": "SNKThreadMonitor/Classes/Core/export/**/*"
+      "source_files": "SNKThreadMonitor/Classes/Core/**/*"
     }
   ]
 }

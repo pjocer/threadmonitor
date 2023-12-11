@@ -10,17 +10,13 @@
 #endif
 #endif
 
-#import "Consts.swift"
-#import "Error.swift"
-#import "MachBasicInfo+Desc.swift"
-#import "MachExtendedInfo+Desc.swift"
-#import "MachIdentifierInfo+Desc.swift"
-#import "MachThread+Utils.swift"
-#import "POSIXThread+Utils.swift"
-#import "time_value_t+Codable.swift"
-#import "Indicator.swift"
-#import "ThreadInfo.swift"
-#import "ThreadMonitor.swift"
+#import "SNKBackTrace.h"
+#import "back_trace.h"
+#import "context_helper.h"
+#import "lock_checker.h"
+#import "lock_indicator.h"
+#import "mach.h"
+#import "posix.h"
 
 FOUNDATION_EXPORT double SNKThreadMonitorVersionNumber;
 FOUNDATION_EXPORT const unsigned char SNKThreadMonitorVersionString[];
