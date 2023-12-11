@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
   
   s.subspec 'Core' do |c|
     c.source_files = 'SNKThreadMonitor/Classes/Core/**/*'
-    c.public_header_files = 'SNKThreadMonitor/Classes/Core/export/**/*'
+    c.public_header_files = 'SNKThreadMonitor/Classes/Core/export/**/*.{h, swift}'
   end
   
   s.default_subspecs = 'Core'
