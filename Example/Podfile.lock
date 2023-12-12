@@ -1,7 +1,7 @@
 PODS:
-  - SNKThreadMonitor (0.2.1):
-    - SNKThreadMonitor/Core (= 0.2.1)
-  - SNKThreadMonitor/Core (0.2.1)
+  - SNKThreadMonitor (0.2.2):
+    - SNKThreadMonitor/Core (= 0.2.2)
+  - SNKThreadMonitor/Core (0.2.2)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SNKThreadMonitor: a36291d658433864bc32bcb1846a74c21a2748ce
+  SNKThreadMonitor: a43a0e1ba4568e7d27c265412ad2d5866440956e
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
 PODFILE CHECKSUM: 8ea0dcf8ca67ae9b33d623cfcc41e6b10f964c28
