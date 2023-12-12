@@ -86,9 +86,50 @@ public enum ThreadFlagsType: Int {
     }
 }
 
+public struct ThreadPolicyOptions: OptionSet {
+    public let rawValue: Int32
+    public static let null = ThreadPolicyOptions([])
+    public static let timeShare = ThreadPolicyOptions(rawValue: 1 << 0)
+    public static let roundRobin = ThreadPolicyOptions(rawValue: 1 << 1)
+    public static let fifo = ThreadPolicyOptions(rawValue: 1 << 2)
+    public static let fixedPriority: ThreadPolicyOptions = [.roundRobin, .fifo]
+    public init(rawValue: Int32) {
+        self.rawValue = rawValue
+    }
+    public var desc: String {
+        var descriptions: [String] = []
+        if self.contains(.null) {
+            descriptions.append("Null")
+        }
+        if self.contains(.timeShare) {
+            descriptions.append("Time Share")
+        }
+        if self.contains(.fixedPriority) {
+            descriptions.append("Fixed Priority")
+        } else if self.contains(.roundRobin) {
+            descriptions.append("Round Robin")
+        } else if self.contains(.fifo) {
+            descriptions.append("FIFO")
+        }
+        if descriptions.isEmpty {
+            descriptions.append("Unknown Priority:\(rawValue)")
+        }
+        return descriptions.joined(separator: ", ")
+    }
+}
+
 public struct ThreadMonitorConfig {
     
-    static let `default` = ThreadMonitorConfig(frequency: 3, mainThreadCPUThreshold: 1, threadCPUThreshold: 0.6, processCPUThreshold: 2.5)
+    static let millisecondPerFrame = Float(1000/60.0)
+    
+    static let `default` = ThreadMonitorConfig(frequency: 3, 
+                                               mainThreadCPUThreshold: 1,
+                                               threadCPUThreshold: 0.6,
+                                               processCPUThreshold: 2,
+                                               sleptThreshold: millisecondPerFrame,
+                                               systemRunningThreshold: 20*millisecondPerFrame,
+                                               userRunningThreshold: 60*millisecondPerFrame,
+                                               totalRunningThreshold: 100*millisecondPerFrame)
     
     // 监控频率（不建议配置太高的频率，使用过高的频率会导致过高的CPU和资源占用）
     public var frequency: TimeInterval
@@ -98,12 +139,24 @@ public struct ThreadMonitorConfig {
     public var threadCPUThreshold: Float
     // 当前进程的CPU占用率上报阈值
     public var processCPUThreshold: Float
+    // 单一线程的睡眠时间上报阈值(毫秒)
+    public var sleptThreshold: Float
+    // 单一线程的系统态耗时上报阈值(毫秒)
+    public var systemRunningThreshold: Float
+    // 单一线程的用户态耗时上报阈值(毫秒)
+    public var userRunningThreshold: Float
+    // 单一线程的总执行时长上报阈值(毫秒)
+    public var totalRunningThreshold: Float
     
-    init(frequency: TimeInterval, mainThreadCPUThreshold: Float, threadCPUThreshold: Float, processCPUThreshold: Float) {
+    public init(frequency: TimeInterval, mainThreadCPUThreshold: Float, threadCPUThreshold: Float, processCPUThreshold: Float, sleptThreshold: Float, systemRunningThreshold: Float, userRunningThreshold: Float, totalRunningThreshold: Float) {
         self.frequency = frequency
         self.mainThreadCPUThreshold = mainThreadCPUThreshold
         self.threadCPUThreshold = threadCPUThreshold
         self.processCPUThreshold = processCPUThreshold
+        self.sleptThreshold = sleptThreshold
+        self.systemRunningThreshold = systemRunningThreshold
+        self.userRunningThreshold = userRunningThreshold
+        self.totalRunningThreshold = totalRunningThreshold
     }
 }
 

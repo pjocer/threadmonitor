@@ -35,12 +35,22 @@ public enum HighCPUUsageType {
     case process(_ prividings: [MachInfoProvider], usage: Float)
 }
 
+// 长运行时间
+public enum LongRunningType {
+    // 系统态耗时过久
+    case system(_ providing: MachInfoProvider, millisecond: Float)
+    // 用户态耗时过久
+    case user(_ providing: MachInfoProvider, millisecond: Float)
+    // 总耗时过久
+    case total(_ providing: MachInfoProvider, millisecond: Float)
+}
+
 // 指标
 public enum Indicator: IndicatorType {
     case deadLock(_ type: DeadLockType)
-    case priorityInversion
-    case longWaiting
-    case longRunning
+    case priorityInversion(_ t: MachInfoProvider, currentPriority: Int32)
+    case longWaiting(_ t: MachInfoProvider, millisecond: Float)
+    case longRunning(_ t: LongRunningType)
     case highCPUUsage(_ type: HighCPUUsageType)
     public var name: String {
         switch self {
@@ -50,14 +60,22 @@ public enum Indicator: IndicatorType {
             return "PROORITY_INVERSION_DETACHED"
         case .longWaiting:
             return "LONG_WAITING"
-        case .longRunning:
+        case .longRunning(let t):
+            switch t {
+            case .system:
+                return "LONG_SYSTEM_RUNNING"
+            case .user:
+                return "LONG_USER_RUNNING"
+            case .total:
+                return "LONG_RUNNING"
+            }
             return "LONG_RUNNING"
         case .highCPUUsage(let t):
             switch t {
-            case let .thread(p, u):
-                return "THREAD_CPU_HIGH(\(u*100)%)"
-            case let .process(_, u):
-                return "PROCESS_CPU_HIGH(\(u*100)%)"
+            case .thread:
+                return "THREAD_CPU_HIGH"
+            case .process:
+                return "PROCESS_CPU_HIGH"
             }
         }
     }
@@ -69,18 +87,28 @@ public enum Indicator: IndicatorType {
                 guard let s = h.symbols.firstObject as? String else { return "Null" }
                 return "\(h.thread)(\(h.thread.name)\(h.queueName)):\(s)"
             }
-        case .priorityInversion:
-            return "优先级反转"
-        case .longWaiting:
-            return "长时间等待"
-        case .longRunning:
-            return "执行耗时过久"
+        case let .priorityInversion(p, cp):
+            return "\(p.thread)(\(cp))"
+        case let .longWaiting(p, m):
+            return "\(p.thread)(\(m)ms)"
+        case .longRunning(let t):
+            switch t {
+            case let .system(p, s):
+                guard let extendInfo = p.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+                return "\(p.thread)(\(s)ms)"
+            case let .user(p, s):
+                guard let extendInfo = p.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+                return "\(p.thread)(\(s)ms)"
+            case let .total(p, s):
+                guard let extendInfo = p.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+                return "\(p.thread)(\(s)ms)"
+            }
         case .highCPUUsage(let t):
             switch t {
-            case let .thread(p, _):
-                return "\(p.thread)(\(p.thread.name) in \(p.thread.identifierInfo?.queueName ?? "")):"
-            case let .process(ps, _):
-                return "threads(\(ps.count))"
+            case let .thread(p, u):
+                return "\(p.thread)(\(p.thread.name) in \(p.thread.identifierInfo?.queueName ?? ""))(\(u*100)%):"
+            case let .process(ps, u):
+                return "\(ps.count) threads amounts to \(u*100)%."
             }
         }
     }
@@ -92,12 +120,24 @@ public enum Indicator: IndicatorType {
                 let wsp = ws.reduce("") { $0 + "\($1.thread)(\($1.threadName) in \($1.queueName))" + "\n" }
                 return "HoldingThreadInfo:\(h.thread)(\(h.threadName) in \(h.queueName))\nWaitingThreadInfos:\(wsp)"
             }
-        case .priorityInversion:
-            return ""
-        case .longWaiting:
-            return ""
-        case .longRunning:
-            return ""
+        case let .priorityInversion(p, cp):
+            guard let extendInfo = p.thread.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+            return "Base Priority:\(extendInfo.pth_priority)\nCurrent Priority:\(cp)\nMax Priority:\(extendInfo.pth_maxpriority)\nPolicy:\(extendInfo.policy.desc)"
+        case let .longWaiting(p, m):
+            guard let extendInfo = p.thread.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+            return "State:\(extendInfo.machStateDesc)\nFlag:\(extendInfo.flagDesc)\nSlept Time:\(m)ms"
+        case .longRunning(let t):
+            switch t {
+            case let .system(p, m):
+                guard let extendInfo = p.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+                return "State:\(extendInfo.machStateDesc)\nFlag:\(extendInfo.flagDesc)\nSystem Time:\(m)ms"
+            case let .user(p, m):
+                guard let extendInfo = p.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+                return "State:\(extendInfo.machStateDesc)\nFlag:\(extendInfo.flagDesc)\nUser Time:\(m)ms"
+            case let .total(p, m):
+                guard let extendInfo = p.extendInfo else { return "Couldnt get thread extend info:\(p.thread)" }
+                return "State:\(extendInfo.machStateDesc)\nFlag:\(extendInfo.flagDesc)\nTotal Time:\(m)ms"
+            }
         case .highCPUUsage(let t):
             switch t {
             case let .thread(p, _):
@@ -116,12 +156,19 @@ public enum Indicator: IndicatorType {
                 result += waitings
                 return result
             }
-        case .priorityInversion:
-            return []
-        case .longWaiting:
-            return []
-        case .longRunning:
-            return []
+        case .priorityInversion(let p, _):
+            return [SNKBackTrace(p.thread)]
+        case let .longWaiting(p, _):
+            return [SNKBackTrace(p.thread)]
+        case let .longRunning(t):
+            switch t {
+            case let .system(p, _):
+                return [SNKBackTrace(p.thread)]
+            case let .user(p, _):
+                return [SNKBackTrace(p.thread)]
+            case let .total(p, _):
+                return [SNKBackTrace(p.thread)]
+            }
         case .highCPUUsage(let t):
             switch t {
             case let .thread(p, _):
@@ -146,12 +193,19 @@ public enum Indicator: IndicatorType {
                 r["Waiting Threads"] = w
                 return r
             }
-        case .priorityInversion:
-            return [String: Any]()
-        case .longWaiting:
-            return [String: Any]()
-        case .longRunning:
-            return [String: Any]()
+        case .priorityInversion(let p, _):
+            return p.thread.descHashable
+        case let .longWaiting(p, _):
+            return p.thread.descHashable
+        case let .longRunning(t):
+            switch t {
+            case let .system(p, _):
+                return p.thread.descHashable
+            case let .user(p, _):
+                return p.thread.descHashable
+            case let .total(p, _):
+                return p.thread.descHashable
+            }
         case .highCPUUsage(let t):
             switch t {
             case let .thread(p, _):

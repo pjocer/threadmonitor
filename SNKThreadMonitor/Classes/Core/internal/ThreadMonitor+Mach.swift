@@ -38,17 +38,33 @@ extension ThreadMonitor {
             let machPointer = threadList![i]
             let info = MachInfoProvider(machPointer)
             $_activeThreadInfo.append(info)
-            if let basicInfo = info.basicInfo {
-                let cpuUsage = Float(basicInfo.cpu_usage)
+            if let extendInfo = machPointer.extendInfo {
+                let cpuUsage = Float(extendInfo.pth_cpu_usage)
                 let usagePercent = cpuUsage / Float(TH_USAGE_SCALE)
                 totalCPUUsage += usagePercent
-                if machPointer.isMainThread {
-                    if usagePercent >= config.mainThreadCPUThreshold {
-                        self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                let isMainThread = machPointer.isMainThread
+                let threadThreshold = isMainThread ?  config.mainThreadCPUThreshold :  config.threadCPUThreshold
+                if usagePercent >= threadThreshold {
+                    self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                }
+                if extendInfo.pth_priority != extendInfo.pth_curpri {
+                    self.notifyDelegates(.indicator(Indicator.priorityInversion(info, currentPriority: extendInfo.pth_curpri)))
+                }
+                if extendInfo.machState == .wating, Float(extendInfo.pth_sleep_time)/1000/1000 > config.sleptThreshold {
+                    self.notifyDelegates(.indicator(Indicator.longWaiting(info, millisecond: Float(extendInfo.pth_sleep_time)/1000/1000)))
+                }
+                if (!isMainThread) {
+                    let systemTime = Float(extendInfo.pth_system_time)/1000/1000
+                    if systemTime > config.systemRunningThreshold {
+                        self.notifyDelegates(.indicator(Indicator.longRunning(.system(info, millisecond: systemTime))))
                     }
-                } else {
-                    if usagePercent >= config.threadCPUThreshold {
-                        self.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(info, usage: usagePercent))))
+                    let userTime = Float(extendInfo.pth_user_time)/1000/1000
+                    if userTime > config.userRunningThreshold {
+                        self.notifyDelegates(.indicator(Indicator.longRunning(.user(info, millisecond: userTime))))
+                    }
+                    let totalTime = systemTime + userTime
+                    if totalTime > config.totalRunningThreshold {
+                        self.notifyDelegates(.indicator(Indicator.longRunning(.user(info, millisecond: totalTime))))
                     }
                 }
             }

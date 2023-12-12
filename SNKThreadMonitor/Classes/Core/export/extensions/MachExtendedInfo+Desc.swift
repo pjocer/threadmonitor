@@ -8,6 +8,29 @@
 import Foundation
 
 public extension MachExtendedInfo {
+    // 系统内核标记的线程状态
+    public var machState: ThreadMachState? {
+        return ThreadMachState(rawValue: Int(pth_run_state))
+    }
+    public var machStateDesc: String {
+        guard let machState = machState else { return "Unknown(\(pth_run_state))" }
+        return machState.desc
+    }
+    // 系统对线程的状态标记
+    public var flag: ThreadFlagsType? { ThreadFlagsType(rawValue: Int(pth_flags)) }
+    public var flagDesc: String {
+        guard let flag = flag else { return "Unknown(\(pth_flags))" }
+        return flag.desc
+    }
+    // CPU占用情况
+    public var cpuUsage: String {
+        return "\(Float(pth_cpu_usage)*100/Float(TH_USAGE_SCALE))%"
+    }
+    // 调度策略
+    public var policy: ThreadPolicyOptions {
+        ThreadPolicyOptions(rawValue: pth_policy)
+    }
+    
     // 线程名称
     public var name: String {
         let ccharArray = withUnsafeBytes(of: pth_name) { Array($0) }
@@ -25,8 +48,16 @@ public extension MachExtendedInfo {
         let mirror = Mirror(reflecting: self)
         for (key, value) in mirror.children {
             if let key = key {
-                if key == "pth_name" {
+                if key == "pth_run_state" {
+                    dictionary[key] = machStateDesc
+                } else if key == "pth_flags" {
+                    dictionary[key] = flagDesc
+                } else if key == "pth_cpu_usage" {
+                    dictionary[key] = cpuUsage
+                } else if key == "pth_name" {
                     dictionary[key] = name
+                } else if key == "pth_policy" {
+                    dictionary[key] = policy.desc
                 } else {
                     dictionary[key] = value
                 }
