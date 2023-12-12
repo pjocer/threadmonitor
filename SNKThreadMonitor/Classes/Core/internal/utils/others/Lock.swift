@@ -7,12 +7,12 @@
 
 import Foundation
 
-private protocol Lock {
+public protocol Lock {
     func lock()
     func unlock()
 }
 
-extension Lock {
+public extension Lock {
     func around<T>(_ closure: () -> T) -> T {
         lock(); defer { unlock() }
         return closure()
@@ -30,7 +30,7 @@ extension NSLock: Lock {}
 #endif
 
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
-final class UnfairLock: Lock {
+final public class UnfairLock: Lock {
     private let unfairLock: os_unfair_lock_t
 
     init() {
@@ -43,11 +43,11 @@ final class UnfairLock: Lock {
         unfairLock.deallocate()
     }
 
-    fileprivate func lock() {
+    public func lock() {
         os_unfair_lock_lock(unfairLock)
     }
 
-    fileprivate func unlock() {
+    public func unlock() {
         os_unfair_lock_unlock(unfairLock)
     }
 }
@@ -55,7 +55,7 @@ final class UnfairLock: Lock {
 
 @propertyWrapper
 @dynamicMemberLookup
-final class Protected<T> {
+public final class Protected<T> {
     #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private let lock = UnfairLock()
     #elseif os(Linux) || os(Windows)
@@ -63,34 +63,34 @@ final class Protected<T> {
     #endif
     private var value: T
 
-    init(_ value: T) {
+    public init(_ value: T) {
         self.value = value
     }
-    var wrappedValue: T {
+    public var wrappedValue: T {
         get { lock.around { value } }
         set { lock.around { value = newValue } }
     }
 
-    var projectedValue: Protected<T> { self }
+    public var projectedValue: Protected<T> { self }
 
-    init(wrappedValue: T) {
+    public init(wrappedValue: T) {
         value = wrappedValue
     }
-    func read<U>(_ closure: (T) -> U) -> U {
+    public func read<U>(_ closure: (T) -> U) -> U {
         lock.around { closure(self.value) }
     }
     @discardableResult
-    func write<U>(_ closure: (inout T) -> U) -> U {
+    public func write<U>(_ closure: (inout T) -> U) -> U {
         lock.around { closure(&self.value) }
     }
 
-    subscript<Property>(dynamicMember keyPath: WritableKeyPath<T, Property>) -> Property {
+    public subscript<Property>(dynamicMember keyPath: WritableKeyPath<T, Property>) -> Property {
         get { lock.around { value[keyPath: keyPath] } }
         set { lock.around { value[keyPath: keyPath] = newValue } }
     }
 }
 
-extension Protected where T: RangeReplaceableCollection {
+public extension Protected where T: RangeReplaceableCollection {
     func append(_ newElement: T.Element) {
         write { (ward: inout T) in
             ward.append(newElement)
@@ -108,7 +108,7 @@ extension Protected where T: RangeReplaceableCollection {
     }
 }
 
-extension Protected where T == Data? {
+public extension Protected where T == Data? {
     func append(_ data: Data) {
         write { (ward: inout T) in
             ward?.append(data)
