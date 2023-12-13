@@ -66,3 +66,39 @@ public extension MachExtendedInfo {
         return dictionary
     }
 }
+
+extension MachExtendedInfo {
+    func notifyRunningWarningsIfNeeded(_ providing: MachInfoProvider) {
+        if !providing.thread.isMainThread, flag != nil, machState != .running {
+            let systemTime = Float(pth_system_time)/1000/1000
+            if systemTime > ThreadMonitor.shared.config.systemRunningThreshold {
+                ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.longRunning(.system(providing, millisecond: systemTime))))
+            }
+            let userTime = Float(pth_user_time)/1000/1000
+            if userTime > ThreadMonitor.shared.config.userRunningThreshold {
+                ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.longRunning(.user(providing, millisecond: userTime))))
+            }
+            let totalTime = systemTime + userTime
+            if totalTime > ThreadMonitor.shared.config.totalRunningThreshold {
+                ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.longRunning(.total(providing, millisecond: totalTime))))
+            }
+        }
+    }
+    func notifyWaitingWarningsIfNeeded(_ providing: MachInfoProvider) {
+        if machState == .wating, Float(pth_sleep_time)/1000/1000 > ThreadMonitor.shared.config.sleptThreshold {
+            ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.longWaiting(providing, millisecond: Float(pth_sleep_time)/1000/1000)))
+        }
+    }
+    func notifyPriorityInversionIfNeeded(_ providing: MachInfoProvider) {
+        if pth_priority != pth_curpri {
+            ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.priorityInversion(providing, currentPriority: pth_curpri)))
+        }
+    }
+    func notifyCPUUsageIfNeeded(_ providing: MachInfoProvider, usage: Float) {
+        let isMainThread = providing.thread.isMainThread
+        let threadThreshold = isMainThread ?  ThreadMonitor.shared.config.mainThreadCPUThreshold : ThreadMonitor.shared.config.threadCPUThreshold
+        if usage >= threadThreshold {
+            ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.highCPUUsage(.thread(providing, usage: usage))))
+        }
+    }
+}

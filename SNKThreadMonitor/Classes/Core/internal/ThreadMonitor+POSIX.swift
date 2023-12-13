@@ -40,6 +40,7 @@ extension ThreadMonitor {
                     break
                 case .terminate:
                     self?.notifyDelegates(.state(.finish(info)))
+                    
                     break
                 case .destroy:
                     self?.notifyDelegates(.state(.destory(info)))

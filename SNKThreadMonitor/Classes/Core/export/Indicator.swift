@@ -57,7 +57,7 @@ public enum Indicator: IndicatorType {
         case .deadLock:
             return "DEAD_LOCK_DETACHED"
         case .priorityInversion:
-            return "PROORITY_INVERSION_DETACHED"
+            return "PRIORITY_INVERSION_DETACHED"
         case .longWaiting:
             return "LONG_WAITING"
         case .longRunning(let t):
@@ -69,7 +69,6 @@ public enum Indicator: IndicatorType {
             case .total:
                 return "LONG_RUNNING"
             }
-            return "LONG_RUNNING"
         case .highCPUUsage(let t):
             switch t {
             case .thread:
