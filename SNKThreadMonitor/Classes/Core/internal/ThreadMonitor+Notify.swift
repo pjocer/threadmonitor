@@ -81,8 +81,6 @@ extension ThreadMonitor {
                         case let .mutex(holding, waitings):
                             $0.indicatorDetachedDelegate?.threadMonitorDidReceiveInfosMutexDeadLockDetached(holding, waitings: waitings)
                         }
-                    case .priorityInversion:
-                        break
                     case .longWaiting:
                         break
                     case .longRunning:

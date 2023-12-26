@@ -87,7 +87,7 @@ bool generate_basic_info(thread_act_t mch_port, thread_basic_info_data_t *basicI
     kern_return_t kr = thread_info(mch_port, (thread_flavor_t)THREAD_BASIC_INFO, (thread_info_t)basicInfo, &basicInfoCount);
     if (kr != KERN_SUCCESS) {
         // TODO: 错误处理
-        fprintf(stderr, "Error getting thread basic info: %s\n", mach_error_string(kr));
+        fprintf(stderr, "Error getting thread basic info: %s\n(%ld)", mach_error_string(kr), mch_port);
         return false;
     }
     return true;
@@ -98,7 +98,7 @@ bool generate_identifier_info(thread_act_t mch_port, thread_identifier_info_data
     kern_return_t kr = thread_info(mch_port, (thread_flavor_t)THREAD_IDENTIFIER_INFO, (thread_info_t)identifierInfo, &identifierInfoCount);
     if (kr != KERN_SUCCESS) {
         // TODO: 错误处理
-        fprintf(stderr, "Error getting thread identifier info: %s\n", mach_error_string(kr));
+        fprintf(stderr, "Error getting thread identifier info: %s\n(%ld)", mach_error_string(kr), mch_port);
         return false;
     }
     return true;
@@ -112,7 +112,7 @@ bool generate_extended_info(thread_act_t mch_port, thread_extended_info_data_t *
     kern_return_t kr = thread_info(mch_port, (thread_flavor_t)THREAD_EXTENDED_INFO, (thread_info_t)extendedInfo, &extendedInfoCount);
     if (kr != KERN_SUCCESS) {
         // TODO: 错误处理
-        fprintf(stderr, "Error getting thread extended info: %s\n", mach_error_string(kr));
+        fprintf(stderr, "Error getting thread extended info: %s\n(%ld)", mach_error_string(kr), mch_port);
         return false;
     }
     return true;

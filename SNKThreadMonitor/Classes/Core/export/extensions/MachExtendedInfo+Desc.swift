@@ -89,11 +89,6 @@ extension MachExtendedInfo {
             ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.longWaiting(providing, millisecond: Float(pth_sleep_time)/1000/1000)))
         }
     }
-    func notifyPriorityInversionIfNeeded(_ providing: MachInfoProvider) {
-        if pth_priority != pth_curpri {
-            ThreadMonitor.shared.notifyDelegates(.indicator(Indicator.priorityInversion(providing, currentPriority: pth_curpri)))
-        }
-    }
     func notifyCPUUsageIfNeeded(_ providing: MachInfoProvider, usage: Float) {
         let isMainThread = providing.thread.isMainThread
         let threadThreshold = isMainThread ?  ThreadMonitor.shared.config.mainThreadCPUThreshold : ThreadMonitor.shared.config.threadCPUThreshold

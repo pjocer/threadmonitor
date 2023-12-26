@@ -35,6 +35,14 @@ const bool getPOSIXThreadName(pthread_t thread, char *buffer, size_t bufferSize)
     return kr == KERN_SUCCESS ? true : false;
 }
 
+const bool getPOSIXThreadID(pthread_t thread, __uint64_t *buffer) {
+    int kr = pthread_threadid_np(thread, buffer);
+    if (kr != KERN_SUCCESS) {
+        fprintf(stderr, "Error getThreadId: %s\n", mach_error_string(kr));
+    }
+    return kr == KERN_SUCCESS ? true : false;
+}
+
 pthread_introspection_hook_t g_oldpthread_introspection_hook = NULL;
 void snk_pthread_introspection_hook(unsigned int event, pthread_t thread, void *addr, size_t size) {
     if (MonitorS.callback != NULL)

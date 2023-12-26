@@ -41,6 +41,28 @@ public final class ThreadMonitor {
         }
     }
     
+    // 阶段监控事务组
+    @Protected
+    internal var checkTransactions = [String: SNKThrottle]()
+    public static let ThrottleAllThreadCreated = -1
+    // 开启阶段监控
+    // 回调参数为`ThreadThrottlable`，详见`Consts`
+    public func beginThreadTransactionCheck(_ identifier: String,
+                                            interval: TimeInterval = 1.5,
+                                            max: Int = ThreadMonitor.ThrottleAllThreadCreated,
+                                            callback:@escaping ([SNKThrottle.WorkItem]) -> Void) {
+        $checkTransactions.wrappedValue[identifier] = SNKThrottle(interval: interval, max: max, callback: callback)
+    }
+    // 结束阶段监控
+    public func endThreadTransactionCheck(_ identifier: String) {
+        if let throttle = $checkTransactions.wrappedValue[identifier] {
+            if throttle.max == ThreadMonitor.ThrottleAllThreadCreated {
+                throttle.callbackForced()
+            }
+        }
+        $checkTransactions.wrappedValue[identifier] = nil
+    }
+    
     // 注册代理
     public func registerDelegate(_ delegate: ThreadMonitorDelegate) {
         delegates.add(delegate)
@@ -51,6 +73,7 @@ public final class ThreadMonitor {
         stopMonitorringTimer()
         stopThreadMonitorring()
         unregisterThreadStateNotify()
+        $checkTransactions.wrappedValue.removeAll()
     }
     
     // 监控队列

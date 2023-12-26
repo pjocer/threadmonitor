@@ -23,6 +23,8 @@ typedef NS_CLOSED_ENUM(int, SNKPthreadIntrospectionState) {
 
 const bool getPOSIXThreadName(pthread_t thread, char *buffer, size_t bufferSize);
 
+const bool getPOSIXThreadID(pthread_t thread, __uint64_t *buffer);
+
 void pj_specific_destructor(void *value);
 
 pthread_key_t createSpecificKey(void);

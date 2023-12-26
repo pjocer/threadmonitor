@@ -42,9 +42,7 @@ extension ThreadMonitor {
                 let usagePercent = Float(extendInfo.pth_cpu_usage) / Float(TH_USAGE_SCALE)
                 totalCPUUsage += usagePercent
                 extendInfo.notifyCPUUsageIfNeeded(info, usage: usagePercent)
-                extendInfo.notifyPriorityInversionIfNeeded(info)
                 extendInfo.notifyWaitingWarningsIfNeeded(info)
-                extendInfo.notifyRunningWarningsIfNeeded(info)
             }
             mach_check_thread_dead_lock(machPointer, threadWaitDict)
         }

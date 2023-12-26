@@ -29,7 +29,7 @@ void mach_check_thread_dead_lock(thread_t thread, NSMutableDictionary<NSNumber *
             checkMainEmptyCPUUsageWithWapped(thread, thread_id, threadWaitDic);
         }
         //主线程的 CPU 占用一直很高 ，处于运行的状态，那么就应该怀疑主线程是否存在一些死循环等 CPU 密集型的任务。
-        if ((run_state & TH_STATE_RUNNING) && cpu_usage > 800) {
+        if ((run_state & TH_STATE_RUNNING) && ((float)cpu_usage)/TH_USAGE_SCALE > 0.8) {
             //怀疑死循环
             NSLog(@"怀疑死循环:%llu",thread_id);
         }
@@ -44,7 +44,7 @@ void checkMainHighCPUUsage(thread_t thread, uint64_t thread_id , NSMutableDictio
 // 主线程CPU占用为0，等待状态且已被换出
 void checkMainEmptyCPUUsageWithWapped(thread_t thread, uint64_t thread_id, NSMutableDictionary<NSNumber *,NSMutableArray<NSNumber *> *> *threadWaitDic) {
 #ifndef __i386__
-    // 通过符号化判断它是否是一个锁等待的方法。
+    // 通过符号判断它是否是一个锁等待的方法。
     _STRUCT_MCONTEXT machineContext;
     //通过 thread_get_state 获取完整的 machineContext 信息，包含 thread 状态信息
     mach_msg_type_number_t state_count = j_threadStateCountByCPU();

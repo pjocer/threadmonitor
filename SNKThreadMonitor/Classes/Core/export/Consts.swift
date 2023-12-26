@@ -6,14 +6,14 @@
 //
 import Foundation
 
-// Mach
+// Mach Thread
 public typealias MachThread = thread_act_t
 public typealias MachBasicInfo = thread_basic_info
 public typealias MachIdentifierInfo = thread_identifier_info
 public typealias MachExtendedInfo = thread_extended_info
 public typealias MachIoStatInfo = io_stat_info
 
-// POSIX
+// POSIX Thread
 public typealias POSIXThread = pthread_t
 
 /**
@@ -86,6 +86,10 @@ public enum ThreadFlagsType: Int {
     }
 }
 
+/**
+ MACH_POLICY
+ 线程调度策略
+ */
 public struct ThreadPolicyOptions: OptionSet {
     public let rawValue: Int32
     public static let null = ThreadPolicyOptions([])
@@ -118,6 +122,9 @@ public struct ThreadPolicyOptions: OptionSet {
     }
 }
 
+/**
+ 监控器配置
+ */
 public struct ThreadMonitorConfig {
     
     static let millisecondPerFrame = Float(1000/60.0)
