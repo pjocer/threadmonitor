@@ -1,0 +1,9 @@
+SnakeGameSingle/Assets.xcassets/AppIcon_dev.appiconset/
+SnakeGameSingle/Assets.xcassets/AppIcon.appiconset/
+SnakeGameSingle/Assets.xcassets/OLGame/ol_team_match_bg.imageset
+SnakeGameSingle/Assets.xcassets/OLGame/ol_match_team_left_bg.imageset
+SnakeGameSingle/Assets.xcassets/EatClub/eat_club_head_finish.imageset
+SnakeGameSingle/Assets.xcassets/EatClub/eat_club_head.imageset
+SnakeGameSingle/Assets.xcassets/Common/common_merge_light_bg.imageset
+SnakeGameSingle/Assets.xcassets/Store/store_skin_preview.imageset
+SnakeGameSingle/Assets.xcassets/OLMatchTeam/ol_match_team_left_bg.imageset
