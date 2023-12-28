@@ -1,0 +1,125 @@
+-- require("mobdebug").start("192.168.31.78")
+-- viewWillApper_animation(self, animate)
+-- self:origin(_ENV)
+-- self:super(_ENV)
+
+-- 协议离婚弹窗问题
+wpfix_class({"SNKDivorceLogic"},
+function(_ENV)
+   function startAgreementDivorce(self)
+     self:origin(_ENV):startAgreementDivorce()
+     local currentVCChildVCS = self:weakVC():topParentViewController():childViewControllers()
+     local lastVC = currentVCChildVCS[#currentVCChildVCS]
+     lastVC:setClickAlertActionBlock_(
+        wpfix_block(
+            function(actionType, alertVC)
+                wpfix.print("actionType == ", actionType)
+                alertVC:dismissSNKVC_(nil)
+                if (actionType == 2)
+                then
+                    wpfix.print("xxxxxxx")
+                    self:requestAgreementDivorce()
+                end
+            end,
+            "void, int, SNKAlertBaseVCNew *"
+        )
+    )
+    end
+end)
+
+-- 取消按钮问题
+wpfix_class({"SNKChurchHoldWeddingLogic"},
+function(_ENV)
+    function showNoUsefulRingAlert(self)
+    local cls = objc_getClass('snakeGame.SNKWeddingSecondaryAlertVC')
+    local vc = cls:alloc():initWithFullText_highlitedText_("首先，你们需要使用一枚新戒指\n才可以再次举办婚礼哦～", nil)
+    vc:setClickAlertActionBlock_(
+        wpfix_block(
+            function(actionType, alertVC)
+                if (actionType == 2 or actionType == 1)
+                then
+                    alertVC:dismissSNKVC_(nil)
+                end
+            end,
+            "void, int, SNKAlertBaseVCNew *"
+        )
+    )
+    self:weakVC():presentSNKAlertVC_(vc)
+    end
+end)
+
+-- 修复unity无尽没有处理送好礼数据的逻辑
+wpfix_class({"SNKUnitySGGameEndLogic"},
+function(_ENV)
+   function prepareShowGameEndScoreRewardAlertVC_(self,gameResultItem)
+      local gameItem = gameResultItem:endlessGameReward()
+      if (gameItem) then
+        local className = 'snakeGame.SNKEndlessRewardService'
+        local cur_fix_class = objc_getClass(className)
+        cur_fix_class:updateRewardResult_(gameItem);
+      end
+      self:origin(_ENV):prepareShowGameEndScoreRewardAlertVC_(gameResultItem)
+   end
+end)
+
+-- 修复低性能设备不能点击的问题
+wpfix_class({"snakeGame.SNKEndlessRewardActivityVCView"},
+function(_ENV)
+   function hitTest_withEvent_(self,point,event)
+     if (UIDevice:lessThanOrEqual1GMemoryDevice() == true) then
+        return self:super(_ENV):hitTest_withEvent_(point,event)
+     else
+        return self:origin(_ENV):hitTest_withEvent_(point,event)
+     end
+
+   end
+end)
+
+-- 修复婚礼宣告界面的错别字
+wpfix_class({"SNKWeddingAnnounceAsideStep"},
+function(_ENV)
+    function startWithStartTime_currentTime_(self, startTime, currentTime)
+        self:showSpeechAlertView()
+        self:speechAlertView():configAnnounceAsideState()
+        self:checkShowBlessVC_(true)
+
+        local groomUser = SNKUserSimpleInfoManager:sharedManager():userForUid_(SNKWeddingService:husband())
+        local brideUser = SNKUserSimpleInfoManager:sharedManager():userForUid_(SNKWeddingService:wife())
+        local groomName = string.format("「%s」", groomUser:nickname())
+        local brideName = string.format("「%s」", brideUser:nickname())
+        local groomColor = UIColor:colorWithRed_green_blue_alpha_(121.0 / 255.0, 183.0 / 255.0, 255.0 / 255.0, 1.0)
+        local brideColor = UIColor:colorWithRed_green_blue_alpha_(255.0 / 255.0, 140.0 / 255.0, 164.0 / 255.0, 1.0)
+
+        local attr = NSMutableAttributedString:alloc():init()
+        attr:appendAttributedString_(NSAttributedString:alloc():initWithString_("正式宣布，"))
+        attr:appendAttributedString_(NSAttributedString:alloc():initWithString_attributes_(groomName, {NSColor = groomColor}))
+        attr:appendAttributedString_(NSAttributedString:alloc():initWithString_("与"))
+        attr:appendAttributedString_(NSAttributedString:alloc():initWithString_attributes_(brideName, {NSColor = brideColor}))
+        attr:appendAttributedString_(NSAttributedString:alloc():initWithString_("结为夫妇，祝愿新婚快乐，百年好合！"))
+        --wpfix.print("====", attr)
+        self:speechAlertView():configAsideStateWithAttr_(attr)
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), wpfix_block(function()
+            self:p__showSecondAside()
+        end, "void,void"))
+    end
+end)
+
+-- 修复举办婚礼选择戒指时，戒指没有布局而导致戒指不显示的问题
+wpfix_class({"snakeGame.SNKSelectRingCell"},
+function(_ENV)
+end,
+function(_ENV)
+    function requiresConstraintBasedLayout(self)
+        return true
+    end
+end)
+
+-- 修复unity无尽的插屏展示问题
+wpfix_class({"SNKUnitySGGameEndLogic"},
+function(_ENV)
+    function singleGameStart(self)
+        self:origin(_ENV):singleGameStart()
+        SNKSingleGameAdPopupService:startGame()
+    end
+end)
